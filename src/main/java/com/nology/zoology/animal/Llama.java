@@ -1,16 +1,16 @@
 package com.nology.zoology.animal;
 
-public class Crocodile {
+public class Llama {
 
-    private String id;
+    private int id;
     private String name;
     private int age;
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
