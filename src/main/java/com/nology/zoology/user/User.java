@@ -1,5 +1,9 @@
 package com.nology.zoology.user;
 
+/**
+ * Represents a User for the Zoo sim.
+ * A user has a name, an optional password, email address and a unique id.
+ */
 public class User {
 
     private String name;
