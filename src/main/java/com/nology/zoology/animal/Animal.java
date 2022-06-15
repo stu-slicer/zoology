@@ -36,6 +36,10 @@ public class Animal {
         this.age = age;
     }
 
+    public void makeSound() {
+        System.out.println("They same nothing..."); // silence
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("");
