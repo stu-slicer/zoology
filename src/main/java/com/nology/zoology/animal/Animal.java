@@ -35,4 +35,16 @@ public class Animal {
     public void setAge(int age) {
         this.age = age;
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("");
+        sb.append(getClass().getSimpleName());
+        sb.append("[id=").append(id);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", age=").append(age);
+        sb.append(']');
+        return sb.toString();
+    }
+
 }
