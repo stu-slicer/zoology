@@ -15,13 +15,14 @@ public class AnimalFactory {
 
         do {
             created = doCreateAnimal(type);
-        } while ( namesMap.getOrDefault(created.getType(), new HashSet<>()).contains( created.getName() ) );
+            if( ! this.namesMap.containsKey( created.getType() ) ) {
+                this.namesMap.put( created.getType(), new HashSet<>() );
+            }
+        } while ( namesMap.get(created.getType()).contains( created.getName() ) );
 
         creationHistory.add(created);
 
-        Set<String> namesForType = namesMap.getOrDefault(created.getType(), new HashSet<>());
-        namesForType.add( created.getName() );
-        namesMap.put( created.getType(), namesForType );
+        namesMap.get(created.getType()).add( created.getName() );
 
         return created;
     }
