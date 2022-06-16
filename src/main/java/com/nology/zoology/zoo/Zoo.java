@@ -1,11 +1,9 @@
 package com.nology.zoology.zoo;
 
-import com.nology.zoology.animal.Animal;
-import com.nology.zoology.animal.Crocodile;
-import com.nology.zoology.animal.Llama;
-import com.nology.zoology.animal.Tiger;
+import com.nology.zoology.animal.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Zoo {
 
@@ -27,10 +25,20 @@ public class Zoo {
         return this.animals.size();
     }
 
-    public void listAnimals() {
-        for (Animal animal : animals) {
-            System.out.println("Animal: " + animal);
-        }
+public void listAnimals(AnimalSorting animalSorting) {
+    switch (animalSorting) {
+        case byName:
+            Collections.sort( animals, new SortByAnimalName() );
+            break;
+        case byType:
+            Collections.sort( animals, new SortByAnimalTypeThenName() );
+            break;
+        default:
+            Collections.sort( animals );
     }
+    for (Animal animal : animals) {
+        System.out.println("Animal: " + animal);
+    }
+}
 
 }
