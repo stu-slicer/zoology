@@ -27,4 +27,10 @@ public class Zoo {
         return this.animals.size();
     }
 
+    public void listAnimals() {
+        for (Animal animal : animals) {
+            System.out.println("Animal: " + animal);
+        }
+    }
+
 }
