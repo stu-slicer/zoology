@@ -81,8 +81,8 @@ public class Zoo {
         }
     }
 
-    public Animal findAnimalById(int id) {
-        return this.idMap.get(id);
+    public Optional<Animal> findAnimalById(int id) {
+        return Optional.ofNullable(this.idMap.get(id));
     }
 
     public List<Animal> findAnimalsByName(String name) {
