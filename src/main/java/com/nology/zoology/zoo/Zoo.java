@@ -26,31 +26,8 @@ public class Zoo {
         }
     }
 
-    public void addAnimal(Tiger tiger) {
-        this.animals.add(tiger);
-        this.idMap.put( tiger.getId(), tiger);
-
-        addAnimalToMaps(tiger);
-    }
-
-
-    public void addAnimal(Llama llama) {
-        this.animals.add(llama);
-        this.idMap.put( llama.getId(), llama);
-
-        addAnimalToMaps(llama);
-    }
-
-    public void addAnimal(Crocodile crocodile) {
-        this.animals.add(crocodile);
-        this.idMap.put( crocodile.getId(), crocodile);
-
-        addAnimalToMaps(crocodile);
-    }
-
     public void addAnimal(Animal animal) {
         this.animals.add(animal);
-
         addAnimalToMaps(animal);
     }
 
