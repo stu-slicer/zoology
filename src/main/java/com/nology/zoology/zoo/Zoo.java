@@ -15,6 +15,17 @@ public class Zoo {
 
     private Map<String, List<Animal>> nameMap = new HashMap<>();
 
+    private AnimalLoader animalLoader;
+
+    public Zoo(AnimalLoader animalLoader) {
+        this.animalLoader = animalLoader;
+        List<Animal> toLoad = animalLoader.loadAnimals();
+        for (Animal animalToLoad : toLoad) {
+            this.animals.add( animalToLoad );
+            addAnimalToMaps(animalToLoad );
+        }
+    }
+
     public void addAnimal(Tiger tiger) {
         this.animals.add(tiger);
         this.idMap.put( tiger.getId(), tiger);
