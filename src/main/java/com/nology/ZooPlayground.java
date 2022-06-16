@@ -1,6 +1,7 @@
 package com.nology;
 
 import com.nology.zoology.animal.*;
+import com.nology.zoology.animal.loader.CSVAnimalLoader;
 import com.nology.zoology.animal.loader.RandomAnimalLoader;
 import com.nology.zoology.zoo.Zoo;
 
@@ -13,7 +14,10 @@ public class ZooPlayground {
 
     public static void main(String[] args) {
 
-        Zoo zoo = new Zoo(new RandomAnimalLoader());
+        RandomAnimalLoader randomAnimalLoader = new RandomAnimalLoader();
+        CSVAnimalLoader csvAnimalLoader = new CSVAnimalLoader("src/main/resources/animals-to-load.csv");
+
+        Zoo zoo = new Zoo(csvAnimalLoader);
 
         System.out.println( zoo.getAnimalCount() );
 
@@ -21,6 +25,12 @@ public class ZooPlayground {
 
         List<Animal> found = zoo.findAnimalsByName("fluffy");
         System.out.println(found);
+
+        List<Animal> sortedAnimals = zoo.getAnimals(AnimalSorting.byId);
+        for (Animal sortedAnimal : sortedAnimals) {
+            System.out.println(String.format("%d,%s,%s,%d",
+                    sortedAnimal.getId(), sortedAnimal.getType(), sortedAnimal.getName(), sortedAnimal.getAge() ));
+        }
 
     }
 

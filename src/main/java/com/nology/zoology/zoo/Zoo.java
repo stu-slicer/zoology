@@ -59,6 +59,20 @@ public class Zoo {
         }
     }
 
+    public List<Animal> getAnimals(AnimalSorting animalSorting) {
+        switch (animalSorting) {
+            case byName:
+                Collections.sort(animals, new SortByAnimalName());
+                break;
+            case byType:
+                Collections.sort(animals, new SortByAnimalTypeThenName());
+                break;
+            default:
+                Collections.sort(animals);
+        }
+        return List.copyOf( animals );
+    }
+
     public Optional<Animal> findAnimalById(int id) {
         return Optional.ofNullable(this.idMap.get(id));
     }
