@@ -1,4 +1,4 @@
-package com.nology.zoology.zoo;
+package com.nology.zoology.animal.loader;
 
 import com.nology.zoology.animal.Animal;
 

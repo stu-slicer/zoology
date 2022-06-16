@@ -1,6 +1,7 @@
 package com.nology.zoology.zoo;
 
 import com.nology.zoology.animal.*;
+import com.nology.zoology.animal.loader.AnimalLoader;
 
 import java.util.*;
 

@@ -1,7 +1,7 @@
 package com.nology;
 
 import com.nology.zoology.animal.*;
-import com.nology.zoology.zoo.RandomAnimalLoader;
+import com.nology.zoology.animal.loader.RandomAnimalLoader;
 import com.nology.zoology.zoo.Zoo;
 
 import java.util.List;
