@@ -24,6 +24,15 @@ public class AnimalUtils {
         names.add("Leo");
         names.add("Fluffy");
         names.add("Butch");
+        names.add("Bob");
+        names.add("Lauren");
+        names.add("Holly");
+        names.add("Eve");
+        names.add("Beth");
+        names.add("Kate");
+        names.add("Freddie");
+        names.add("Roger");
+        names.add("Maisie");
     }
 
     public static int nextUniqueId() {

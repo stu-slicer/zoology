@@ -1,7 +1,6 @@
 package com.nology.zoology.animal;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Encapsulates the creation of animals.
@@ -9,10 +8,21 @@ import java.util.List;
 public class AnimalFactory {
 
     private List<Animal> creationHistory = new ArrayList<>();
+    private Map<AnimalType, Set<String>> namesMap = new HashMap<>();
 
     public Animal createAnimal(AnimalType type) {
-        Animal created = doCreateAnimal(type);
+        Animal created;
+
+        do {
+            created = doCreateAnimal(type);
+        } while ( namesMap.getOrDefault(created.getType(), new HashSet<>()).contains( created.getName() ) );
+
         creationHistory.add(created);
+
+        Set<String> namesForType = namesMap.getOrDefault(created.getType(), new HashSet<>());
+        namesForType.add( created.getName() );
+        namesMap.put( created.getType(), namesForType );
+
         return created;
     }
 
