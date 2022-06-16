@@ -1,16 +1,26 @@
 package com.nology.zoology.animal;
 
-public class Animal {
+public abstract class Animal {
 
     protected int id;
     protected String name;
     protected int age;
+    protected boolean pettable;
+    protected int popularity;
+    protected short hunger;
 
     public Animal(int id, String name, int age) {
         this.id = id;
         this.name = name;
         this.age = age;
     }
+
+    public Animal(int id, String name, int age, boolean pettable) {
+        this(id, name, age);
+        this.pettable = pettable;
+    }
+
+    public abstract AnimalType getType();
 
     public int getId() {
         return id;
@@ -36,9 +46,28 @@ public class Animal {
         this.age = age;
     }
 
-    public void makeSound() {
-        System.out.println("They same nothing..."); // silence
+    public boolean isPettable() {
+        return pettable;
     }
+
+    public void setPettable(boolean pettable) {
+        this.pettable = pettable;
+    }
+
+    public int getPopularity() {
+        return popularity;
+    }
+
+    public short getHunger() {
+        return hunger;
+    }
+
+    public void feed() {
+        hunger += 10;
+        makeSound();
+    }
+
+    public abstract void makeSound();
 
     @Override
     public String toString() {
