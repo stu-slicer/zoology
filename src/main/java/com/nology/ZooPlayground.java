@@ -1,5 +1,6 @@
 package com.nology;
 
+import com.nology.command.AnimalCommandRunner;
 import com.nology.zoology.animal.*;
 import com.nology.zoology.animal.loader.CSVAnimalLoader;
 import com.nology.zoology.animal.loader.RandomAnimalLoader;
@@ -17,19 +18,13 @@ public class ZooPlayground {
         RandomAnimalLoader randomAnimalLoader = new RandomAnimalLoader();
         CSVAnimalLoader csvAnimalLoader = new CSVAnimalLoader("src/main/resources/animals-to-load.csv");
 
-        Zoo zoo = new Zoo(csvAnimalLoader);
+        Zoo zoo = new Zoo( randomAnimalLoader );
 
         System.out.println( zoo.getAnimalCount() );
 
-        zoo.listAnimals( AnimalSorting.byType );
+        AnimalCommandRunner commandRunner = new AnimalCommandRunner(zoo);
 
-        List<Animal> found = zoo.findAnimalsByName("fluffy");
-        System.out.println(found);
-
-        for (Animal sortedAnimal : zoo.getAnimals(AnimalSorting.byId)) {
-            System.out.printf("%d,%s,%s,%d%n",
-                    sortedAnimal.getId(), sortedAnimal.getType(), sortedAnimal.getName(), sortedAnimal.getAge() );
-        }
+        commandRunner.runCommands();
 
     }
 
