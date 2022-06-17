@@ -71,6 +71,15 @@ public abstract class Animal implements Comparable<Animal> {
         makeSound();
     }
 
+    public void pet() {
+        if( isPettable() ) {
+            System.out.println(this.name + " likes that!");
+            this.popularity += 5;
+        } else {
+            makeSound();
+        }
+    }
+
     public abstract void makeSound();
 
     public String getInformation() {
