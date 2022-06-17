@@ -1,5 +1,7 @@
 package com.nology.zoology.animal;
 
+import com.nology.ColourUtils;
+
 import java.util.Comparator;
 
 public abstract class Animal implements Comparable<Animal> {
@@ -70,6 +72,11 @@ public abstract class Animal implements Comparable<Animal> {
     }
 
     public abstract void makeSound();
+
+    public String getInformation() {
+        return ColourUtils.red(this.name) + String.format(", a %s, is %d years old, popularity %d%%, hunger %d%%",
+                getType(), this.age, this.popularity, this.hunger);
+    }
 
     @Override
     public int compareTo(Animal other) {
