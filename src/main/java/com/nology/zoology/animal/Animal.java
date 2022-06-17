@@ -74,8 +74,8 @@ public abstract class Animal implements Comparable<Animal> {
     public abstract void makeSound();
 
     public String getInformation() {
-        return ColourUtils.red(this.name) + String.format(", a %s, is %d years old, popularity %d%%, hunger %d%%",
-                getType(), this.age, this.popularity, this.hunger);
+        return ColourUtils.red(this.name) + String.format(" (#%d), a %s, is %d years old, popularity %d%%, hunger %d%%",
+                this.id, getType(), this.age, this.popularity, this.hunger);
     }
 
     @Override
