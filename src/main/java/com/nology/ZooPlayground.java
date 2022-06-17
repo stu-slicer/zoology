@@ -26,10 +26,9 @@ public class ZooPlayground {
         List<Animal> found = zoo.findAnimalsByName("fluffy");
         System.out.println(found);
 
-        List<Animal> sortedAnimals = zoo.getAnimals(AnimalSorting.byId);
-        for (Animal sortedAnimal : sortedAnimals) {
-            System.out.println(String.format("%d,%s,%s,%d",
-                    sortedAnimal.getId(), sortedAnimal.getType(), sortedAnimal.getName(), sortedAnimal.getAge() ));
+        for (Animal sortedAnimal : zoo.getAnimals(AnimalSorting.byId)) {
+            System.out.printf("%d,%s,%s,%d%n",
+                    sortedAnimal.getId(), sortedAnimal.getType(), sortedAnimal.getName(), sortedAnimal.getAge() );
         }
 
     }
