@@ -9,8 +9,8 @@ public abstract class CommandRunner {
 
     private Scanner scanner = new Scanner(System.in);
     private String name;
-    private String[] commands;
-    private CommandType nextCommands;
+    protected String[] commands;
+    protected CommandType nextCommands;
 
     public CommandRunner(String[] commands, String name) {
         this.commands = commands;
@@ -19,6 +19,9 @@ public abstract class CommandRunner {
 
     public void runCommands() {
 
+        intro();
+
+        beforeCommands();
 
         while (true) {
 
@@ -39,6 +42,10 @@ public abstract class CommandRunner {
 
     }
 
+    protected void intro() {
+        printMessage(String.format("\nCommands for %s\n", this.name));
+    }
+
     /**
      * Perform any actions for the given user selection. If the commands needs to stop, for example exiting, then returns false
      * otherwise returns true.
@@ -53,6 +60,7 @@ public abstract class CommandRunner {
      * @return
      */
     protected int readIntegerInput(int limit) {
+        printMessage(String.format("Enter a number between 1 and %d:", limit));
         while( true ) {
             String line = scanner.nextLine();
 
@@ -97,6 +105,8 @@ public abstract class CommandRunner {
 
         }
     }
+
+    protected abstract void beforeCommands();
 
     protected void printIndexedCommands() {
         printIndexedCommands(commands);

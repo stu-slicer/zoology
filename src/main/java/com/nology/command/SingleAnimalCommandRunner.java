@@ -1,0 +1,125 @@
+package com.nology.command;
+
+import com.nology.zoology.animal.Animal;
+import com.nology.zoology.animal.AnimalSorting;
+import com.nology.zoology.zoo.Zoo;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * Command runner for a single {@link Animal}.
+ */
+public class SingleAnimalCommandRunner extends CommandRunner {
+
+    private Zoo zoo;
+    private Animal animal;
+
+    private static final String[] SINGLE_ANIMAL_COMMANDS = {
+            "Feed animal",
+            "Pet animal",
+            "Give star",
+            "Visit another animal",
+            "Exit"
+    };
+
+    public SingleAnimalCommandRunner(Zoo zoo, Animal animal) {
+        super(SINGLE_ANIMAL_COMMANDS, "Animal");
+        this.zoo = zoo;
+        this.animal = animal;
+    }
+
+    protected void listAllAnimals() {
+        printMessage("All animals in the zoo:");
+        List<Animal> zooAnimals = this.zoo.getAnimals(AnimalSorting.byId);
+        for (Animal zooAnimal : zooAnimals) {
+            System.out.println(zooAnimal.getInformation());
+        }
+    }
+
+    protected void feedAnimal() {
+        animal.feed();
+    }
+
+    protected void listAllAnimalsByType() {
+        printMessage("All animals in the zoo:");
+        List<Animal> zooAnimals = this.zoo.getAnimals(AnimalSorting.byType);
+        for (Animal zooAnimal : zooAnimals) {
+            System.out.println(zooAnimal.getInformation());
+        }
+    }
+
+    protected void petAnimal() {
+        if( animal.isPettable() ) {
+            animal.pet();
+        } else {
+            printMessage("I don't think so!");
+        }
+    }
+
+    protected void selectAnimalIfMissing() {
+        if (this.animal == null) {
+            this.animal = selectAnimal();
+        }
+    }
+
+    protected void switchAnimal() {
+        this.animal = selectAnimal();
+    }
+
+    private Animal selectAnimal() {
+        Animal selected = null;
+        while(true) {
+            listAllAnimals();
+            String idOrName = readStringInput("Enter the id or name for the animal:");
+            Animal found = null;
+            try {
+                int id = Integer.valueOf( idOrName );
+                Optional<Animal> animalById = zoo.findAnimalById(id);
+                if( animalById.isPresent() ) {
+                    selected = animalById.get();
+                    break;
+                }
+            } catch (NumberFormatException e) {
+                List<Animal> animalsByName = zoo.findAnimalsByName(idOrName);
+                if (animalsByName.size() == 1) {
+                    selected = animalsByName.get(0);
+                    break;
+                }
+                printMessage("Oh no, there's more than one animal with the name " + idOrName + ", please use the id.");
+            }
+        }
+        if (selected != null) {
+            printMessage(String.format("You have selected %s (%d) the %s", selected.getName(), selected.getId(), selected.getType()));
+        }
+        return selected;
+    }
+
+    @Override
+    protected void beforeCommands() {
+        selectAnimalIfMissing();
+    }
+
+    @Override
+    protected boolean handleUserSelection(int userSelection) {
+        if( userSelection == this.commands.length ) {
+            return false;
+        }
+
+        System.out.println("Performing user selection " + userSelection);
+        switch (userSelection) {
+            case 1:
+                feedAnimal();
+                break;
+            case 2:
+                petAnimal();
+                break;
+            case 4:
+                switchAnimal();
+                break;
+        }
+
+        return true;
+    }
+
+}

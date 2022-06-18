@@ -1,6 +1,7 @@
 package com.nology;
 
 import com.nology.command.AnimalCommandRunner;
+import com.nology.command.SingleAnimalCommandRunner;
 import com.nology.zoology.animal.*;
 import com.nology.zoology.animal.loader.CSVAnimalLoader;
 import com.nology.zoology.animal.loader.RandomAnimalLoader;
@@ -23,6 +24,7 @@ public class ZooPlayground {
         System.out.println( zoo.getAnimalCount() );
 
         AnimalCommandRunner commandRunner = new AnimalCommandRunner(zoo);
+        SingleAnimalCommandRunner singleAnimalCommandRunner = new SingleAnimalCommandRunner(zoo, null);
 
         commandRunner.runCommands();
 

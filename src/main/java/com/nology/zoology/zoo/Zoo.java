@@ -78,7 +78,7 @@ public class Zoo {
     }
 
     public List<Animal> findAnimalsByName(String name) {
-        return this.nameMap.get( name.toLowerCase() );
+        return this.nameMap.getOrDefault( name.toLowerCase(), new ArrayList<>() );
     }
 
 }

@@ -13,6 +13,7 @@ public class AnimalCommandRunner extends CommandRunner {
     private static final String[] ANIMAL_COMMANDS = {
         "List all animals",
         "List animals by type",
+        "Visit an animal",
         "Exit"
     };
 
@@ -37,6 +38,15 @@ public class AnimalCommandRunner extends CommandRunner {
         }
     }
 
+    protected void runSingleAnimalCommands() {
+        SingleAnimalCommandRunner commandRunner = new SingleAnimalCommandRunner(zoo, null);
+        commandRunner.runCommands();
+    }
+
+    @Override
+    protected void beforeCommands() {
+        // do nothing
+    }
 
     @Override
     protected boolean handleUserSelection(int userSelection) {
@@ -51,6 +61,9 @@ public class AnimalCommandRunner extends CommandRunner {
                 break;
             case 2:
                 listAllAnimalsByType();
+                break;
+            case 3:
+                runSingleAnimalCommands();
                 break;
         }
 
