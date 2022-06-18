@@ -1,13 +1,11 @@
 package com.nology;
 
-import com.nology.command.AnimalCommandRunner;
-import com.nology.command.SingleAnimalCommandRunner;
-import com.nology.zoology.animal.*;
+import com.nology.zoology.command.AnimalCommandRunner;
+import com.nology.zoology.command.SingleAnimalCommandRunner;
 import com.nology.zoology.animal.loader.CSVAnimalLoader;
 import com.nology.zoology.animal.loader.RandomAnimalLoader;
 import com.nology.zoology.zoo.Zoo;
 
-import java.util.List;
 import java.util.Random;
 
 public class ZooPlayground {

@@ -1,4 +1,4 @@
-package com.nology.command;
+package com.nology.zoology.command;
 
 import com.nology.zoology.animal.Animal;
 import com.nology.zoology.animal.AnimalSorting;
