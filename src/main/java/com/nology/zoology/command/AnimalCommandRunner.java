@@ -2,8 +2,11 @@ package com.nology.zoology.command;
 
 import com.nology.zoology.animal.Animal;
 import com.nology.zoology.animal.AnimalSorting;
+import com.nology.zoology.animal.SortByStarsThenName;
 import com.nology.zoology.zoo.Zoo;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class AnimalCommandRunner extends CommandRunner {
@@ -13,6 +16,7 @@ public class AnimalCommandRunner extends CommandRunner {
     private static final String[] ANIMAL_COMMANDS = {
         "List all animals",
         "List animals by type",
+        "List animals by stars",
         "Visit an animal",
         "Exit"
     };
@@ -33,6 +37,15 @@ public class AnimalCommandRunner extends CommandRunner {
     protected void listAllAnimalsByType() {
         printMessage("All animals in the zoo:");
         List<Animal> zooAnimals = this.zoo.getAnimals(AnimalSorting.byType);
+        for (Animal zooAnimal : zooAnimals) {
+            System.out.println(zooAnimal.getInformation());
+        }
+    }
+
+    protected void listAllAnimalsByStars() {
+        printMessage("All animals in the zoo:");
+        List<Animal> zooAnimals = new ArrayList<>( this.zoo.getAnimals(AnimalSorting.byType) );
+        Collections.sort( zooAnimals, new SortByStarsThenName() );
         for (Animal zooAnimal : zooAnimals) {
             System.out.println(zooAnimal.getInformation());
         }
@@ -63,6 +76,9 @@ public class AnimalCommandRunner extends CommandRunner {
                 listAllAnimalsByType();
                 break;
             case 3:
+                listAllAnimalsByStars();
+                break;
+            case 4:
                 runSingleAnimalCommands();
                 break;
         }

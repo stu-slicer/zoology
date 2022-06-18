@@ -57,6 +57,11 @@ public class SingleAnimalCommandRunner extends CommandRunner {
         }
     }
 
+    protected void giveStar() {
+        this.animal.receiveStar(1);
+        this.animal.makeSound();
+    }
+
     protected void selectAnimalIfMissing() {
         if (this.animal == null) {
             this.animal = selectAnimal();
@@ -113,6 +118,9 @@ public class SingleAnimalCommandRunner extends CommandRunner {
                 break;
             case 2:
                 petAnimal();
+                break;
+            case 3:
+                giveStar();
                 break;
             case 4:
                 switchAnimal();
