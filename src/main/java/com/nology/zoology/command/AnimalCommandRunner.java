@@ -18,7 +18,7 @@ public class AnimalCommandRunner extends CommandRunner {
         "List animals by type",
         "List animals by stars",
         "Visit an animal",
-        "Exit"
+        "Leave the zoo"
     };
 
     public AnimalCommandRunner(Zoo zoo) {

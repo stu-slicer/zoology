@@ -4,8 +4,6 @@ import com.nology.ColourUtils;
 import com.nology.zoology.star.StarUtils;
 import com.nology.zoology.star.Starrable;
 
-import java.util.Comparator;
-
 public abstract class Animal implements Comparable<Animal>, Starrable {
 
     protected int id;
@@ -70,13 +68,13 @@ public abstract class Animal implements Comparable<Animal>, Starrable {
     }
 
     public void feed() {
-        hunger -= 60;
+        hunger -= getType().getFeedHungerDecrease();
         this.hunger = (short) Math.max( 0, hunger );
         makeSound();
     }
 
     public void increaseHunger() {
-        hunger = (short) Math.min( 100, hunger+1 );
+        hunger = (short) Math.min( 100, hunger + getType().getRateOfHunger() );
     }
 
     public void pet() {
