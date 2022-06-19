@@ -12,27 +12,36 @@ public class AnimalUtils {
     private static final Random RANDOM = new Random();
 
     static {
-        names.add("Alice");
-        names.add("Bob");
-        names.add("Florence");
-        names.add("Charlotte");
-        names.add("Sydney");
-        names.add("Ermintrude");
-        names.add("Bonzo");
-        names.add("Clyde");
-        names.add("Tiddles");
-        names.add("Leo");
-        names.add("Fluffy");
-        names.add("Butch");
-        names.add("Bob");
-        names.add("Lauren");
-        names.add("Holly");
-        names.add("Eve");
+        names.add("Abbie");
+        names.add("Alfred");
         names.add("Beth");
-        names.add("Kate");
+        names.add("Bob");
+        names.add("Bob");
+        names.add("Bonzo");
+        names.add("Butch");
+        names.add("Charlotte");
+        names.add("Clyde");
+        names.add("Ermintrude");
+        names.add("Eve");
+        names.add("Florence");
+        names.add("Fluffy");
         names.add("Freddie");
-        names.add("Roger");
+        names.add("Grumpy");
+        names.add("Holly");
+        names.add("Kate");
+        names.add("Knuckles");
+        names.add("Lauren");
+        names.add("Leo");
         names.add("Maisie");
+        names.add("Max");
+        names.add("Nigel");
+        names.add("Rex");
+        names.add("Roger");
+        names.add("Scobbie");
+        names.add("Spangle");
+        names.add("Star");
+        names.add("Sydney");
+        names.add("Tiddles");
     }
 
     public static int nextUniqueId() {
