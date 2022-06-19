@@ -14,7 +14,7 @@ public abstract class Animal implements Comparable<Animal>, Starrable {
     protected boolean pettable;
     protected int popularity;
     protected int stars;
-    protected short hunger;
+    protected short hunger = 50; // start 50% hungry
 
     public Animal(int id, String name, int age) {
         this.id = id;
@@ -70,8 +70,13 @@ public abstract class Animal implements Comparable<Animal>, Starrable {
     }
 
     public void feed() {
-        hunger += 10;
+        hunger -= 60;
+        this.hunger = (short) Math.max( 0, hunger );
         makeSound();
+    }
+
+    public void increaseHunger() {
+        hunger = (short) Math.min( 100, hunger );
     }
 
     public void pet() {
