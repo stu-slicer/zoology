@@ -76,7 +76,7 @@ public abstract class Animal implements Comparable<Animal>, Starrable {
     }
 
     public void increaseHunger() {
-        hunger = (short) Math.min( 100, hunger );
+        hunger = (short) Math.min( 100, hunger+1 );
     }
 
     public void pet() {
