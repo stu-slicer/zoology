@@ -18,12 +18,31 @@ public class Zoo {
 
     private AnimalLoader animalLoader;
 
+    private IncreaseHungerThread increaseHungerThread;
+    private Thread hungerThread;
+
     public Zoo(AnimalLoader animalLoader) {
         this.animalLoader = animalLoader;
         List<Animal> toLoad = animalLoader.loadAnimals();
         for (Animal animalToLoad : toLoad) {
             this.animals.add( animalToLoad );
             addAnimalToMaps(animalToLoad );
+        }
+
+        increaseHungerThread = new IncreaseHungerThread(this.animals);
+        hungerThread = new Thread(increaseHungerThread);
+        hungerThread.start();
+
+    }
+
+    public void stopThreads() {
+        System.out.println("Closing down!");
+        hungerThread.interrupt();
+        try {
+            hungerThread.join();
+            System.out.println("... waiting for the thread to stop...");
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 

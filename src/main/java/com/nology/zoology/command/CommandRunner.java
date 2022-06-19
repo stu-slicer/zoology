@@ -7,6 +7,10 @@ public abstract class CommandRunner {
     public static final String EXIT = "exit";
     public static final String QUIT = "quit";
 
+    public enum HandleUserSelection {
+        exit, doBreak, moreCommands;
+    }
+
     private Scanner scanner = new Scanner(System.in);
     private String name;
     protected String[] commands;
@@ -23,6 +27,7 @@ public abstract class CommandRunner {
 
         beforeCommands();
 
+        boolean performExit = false;
         while (true) {
 
             printCommands();
@@ -31,19 +36,31 @@ public abstract class CommandRunner {
 
             // if exit ...
 
-            boolean moreCommands = handleUserSelection(userSelection);
+            HandleUserSelection moreCommands = handleUserSelection(userSelection);
 
-            if( !moreCommands ) {
-                break;
+            if( moreCommands != HandleUserSelection.moreCommands) {
+                if( moreCommands == HandleUserSelection.doBreak ) {
+                    break;
+                } else {
+                    performExit = true;
+                    break;
+                }
             }
 
         }
 
+        if( performExit ) {
+            performExit();
+        }
 
     }
 
     protected void intro() {
         printMessage(String.format("\nCommands for %s\n", this.name));
+    }
+
+    protected void performExit() {
+        System.exit(0);
     }
 
     /**
@@ -52,7 +69,7 @@ public abstract class CommandRunner {
      * @param userSelection
      * @return false is running commands needs to stop, otherwise returns true.
      */
-    protected abstract boolean handleUserSelection(int userSelection);
+    protected abstract HandleUserSelection handleUserSelection(int userSelection);
 
     /**
      * Read user's input as a number, should be a number between 1 and the limit. If the user wants to quit then return -1.

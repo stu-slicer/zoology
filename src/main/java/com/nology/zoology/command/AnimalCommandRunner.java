@@ -62,9 +62,9 @@ public class AnimalCommandRunner extends CommandRunner {
     }
 
     @Override
-    protected boolean handleUserSelection(int userSelection) {
+    protected HandleUserSelection handleUserSelection(int userSelection) {
         if( userSelection == ANIMAL_COMMANDS.length ) {
-            return false;
+            return HandleUserSelection.exit;
         }
 
         System.out.println("Performing user selection " + userSelection);
@@ -83,7 +83,12 @@ public class AnimalCommandRunner extends CommandRunner {
                 break;
         }
 
-        return true;
+        return HandleUserSelection.moreCommands;
     }
 
+    @Override
+    protected void performExit() {
+        this.zoo.stopThreads();
+        super.performExit();
+    }
 }

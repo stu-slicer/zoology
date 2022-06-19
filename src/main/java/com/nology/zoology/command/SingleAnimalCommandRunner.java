@@ -106,9 +106,9 @@ public class SingleAnimalCommandRunner extends CommandRunner {
     }
 
     @Override
-    protected boolean handleUserSelection(int userSelection) {
+    protected HandleUserSelection handleUserSelection(int userSelection) {
         if( userSelection == this.commands.length ) {
-            return false;
+            return HandleUserSelection.doBreak;
         }
 
         System.out.println("Performing user selection " + userSelection);
@@ -127,7 +127,7 @@ public class SingleAnimalCommandRunner extends CommandRunner {
                 break;
         }
 
-        return true;
+        return HandleUserSelection.moreCommands;
     }
 
 }
