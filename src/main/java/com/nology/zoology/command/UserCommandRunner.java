@@ -42,10 +42,10 @@ public class UserCommandRunner extends CommandRunner {
         System.out.println("Performing user selection " + userSelection);
         switch (userSelection) {
             case 1:
-                runZooKeeperCommands();
+                runVisitorCommands();
                 break;
             case 2:
-                runVisitorCommands();
+                runZooKeeperCommands();
                 break;
         }
 

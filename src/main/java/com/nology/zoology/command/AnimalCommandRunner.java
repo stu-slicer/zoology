@@ -46,8 +46,10 @@ public class AnimalCommandRunner extends CommandRunner {
         switch (userType) {
             case visitor:
                 commandRunner = new VisitorSingleAnimalCommandRunner(zoo, null);
+                break;
             case zooKeeper:
                 commandRunner = new ZooKeeperSingleAnimalCommandRunner(zoo, null);
+                break;
         }
         commandRunner.runCommands();
     }
