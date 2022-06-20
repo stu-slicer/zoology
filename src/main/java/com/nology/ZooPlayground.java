@@ -1,9 +1,12 @@
 package com.nology;
 
-import com.nology.zoology.command.AnimalCommandRunner;
-import com.nology.zoology.command.SingleAnimalCommandRunner;
 import com.nology.zoology.animal.loader.CSVAnimalLoader;
 import com.nology.zoology.animal.loader.RandomAnimalLoader;
+import com.nology.zoology.command.AnimalCommandRunner;
+import com.nology.zoology.command.SingleAnimalCommandRunner;
+import com.nology.zoology.command.UserCommandRunner;
+import com.nology.zoology.command.ZooKeeperSingleAnimalCommandRunner;
+import com.nology.zoology.user.UserType;
 import com.nology.zoology.zoo.Zoo;
 
 import java.util.Random;
@@ -21,10 +24,12 @@ public class ZooPlayground {
 
         System.out.println( zoo.getAnimalCount() );
 
-        AnimalCommandRunner commandRunner = new AnimalCommandRunner(zoo);
-        SingleAnimalCommandRunner singleAnimalCommandRunner = new SingleAnimalCommandRunner(zoo, null);
+        UserCommandRunner userCommandRunner = new UserCommandRunner(zoo);
+        AnimalCommandRunner commandRunner = new AnimalCommandRunner(zoo, UserType.visitor);
+        AnimalCommandRunner zooKeepeCcommandRunner = new AnimalCommandRunner(zoo, UserType.zooKeeper);
+        SingleAnimalCommandRunner singleAnimalCommandRunner = new ZooKeeperSingleAnimalCommandRunner(zoo, null);
 
-        commandRunner.runCommands();
+        userCommandRunner.runCommands();
 
     }
 

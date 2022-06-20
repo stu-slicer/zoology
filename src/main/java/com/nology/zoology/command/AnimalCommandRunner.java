@@ -3,6 +3,7 @@ package com.nology.zoology.command;
 import com.nology.zoology.animal.Animal;
 import com.nology.zoology.animal.AnimalSorting;
 import com.nology.zoology.animal.SortByStarsThenName;
+import com.nology.zoology.user.UserType;
 import com.nology.zoology.zoo.Zoo;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.List;
 public class AnimalCommandRunner extends CommandRunner {
 
     private Zoo zoo;
+    private UserType userType;
 
     private static final String[] ANIMAL_COMMANDS = {
         "List all animals",
@@ -21,9 +23,10 @@ public class AnimalCommandRunner extends CommandRunner {
         "Exit"
     };
 
-    public AnimalCommandRunner(Zoo zoo) {
+    public AnimalCommandRunner(Zoo zoo, UserType userType) {
         super(ANIMAL_COMMANDS, "Animal");
         this.zoo = zoo;
+        this.userType = userType;
     }
 
     protected void listAllAnimals() {
@@ -52,7 +55,15 @@ public class AnimalCommandRunner extends CommandRunner {
     }
 
     protected void runSingleAnimalCommands() {
-        SingleAnimalCommandRunner commandRunner = new SingleAnimalCommandRunner(zoo, null);
+        SingleAnimalCommandRunner commandRunner = null;
+        switch (userType) {
+            case visitor:
+                commandRunner = new VisitorSingleAnimalCommandRunner(zoo, null);
+                break;
+            case zooKeeper:
+                commandRunner = new ZooKeeperSingleAnimalCommandRunner(zoo, null);
+                break;
+        }
         commandRunner.runCommands();
     }
 

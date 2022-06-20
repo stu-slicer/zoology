@@ -10,21 +10,13 @@ import java.util.Optional;
 /**
  * Command runner for a single {@link Animal}.
  */
-public class SingleAnimalCommandRunner extends CommandRunner {
+public abstract class SingleAnimalCommandRunner extends CommandRunner {
 
-    private Zoo zoo;
-    private Animal animal;
+    protected Zoo zoo;
+    protected Animal animal;
 
-    private static final String[] SINGLE_ANIMAL_COMMANDS = {
-            "Feed animal",
-            "Pet animal",
-            "Give star",
-            "Visit another animal",
-            "Exit"
-    };
-
-    public SingleAnimalCommandRunner(Zoo zoo, Animal animal) {
-        super(SINGLE_ANIMAL_COMMANDS, "Animal");
+    public SingleAnimalCommandRunner(String[] commands,  Zoo zoo, Animal animal) {
+        super(commands, "Animal");
         this.zoo = zoo;
         this.animal = animal;
     }
