@@ -10,21 +10,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class AnimalCommandRunner extends CommandRunner {
+public abstract class AnimalCommandRunner extends CommandRunner {
 
-    private Zoo zoo;
-    private UserType userType;
+    protected Zoo zoo;
+    protected UserType userType;
 
-    private static final String[] ANIMAL_COMMANDS = {
-        "List all animals",
-        "List animals by type",
-        "List animals by stars",
-        "Visit an animal",
-        "Exit"
-    };
-
-    public AnimalCommandRunner(Zoo zoo, UserType userType) {
-        super(ANIMAL_COMMANDS, "Animal");
+    public AnimalCommandRunner(String[] commands, Zoo zoo, UserType userType) {
+        super(commands, "Animal");
         this.zoo = zoo;
         this.userType = userType;
     }
@@ -74,25 +66,11 @@ public class AnimalCommandRunner extends CommandRunner {
 
     @Override
     protected boolean handleUserSelection(int userSelection) {
-        if( userSelection == ANIMAL_COMMANDS.length ) {
+        if( userSelection == this.commands.length ) {
             return false;
         }
 
         System.out.println("Performing user selection " + userSelection);
-        switch (userSelection) {
-            case 1:
-                listAllAnimals();
-                break;
-            case 2:
-                listAllAnimalsByType();
-                break;
-            case 3:
-                listAllAnimalsByStars();
-                break;
-            case 4:
-                runSingleAnimalCommands();
-                break;
-        }
 
         return true;
     }

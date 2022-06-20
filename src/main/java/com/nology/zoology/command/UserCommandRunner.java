@@ -20,12 +20,12 @@ public class UserCommandRunner extends CommandRunner {
     }
 
     protected void runZooKeeperCommands() {
-        AnimalCommandRunner commandRunner = new AnimalCommandRunner(zoo, UserType.zooKeeper);
+        AnimalCommandRunner commandRunner = new ZooKeeperAnimalCommandRunner(zoo, UserType.zooKeeper);
         commandRunner.runCommands();
     }
 
     protected void runVisitorCommands() {
-        AnimalCommandRunner commandRunner = new AnimalCommandRunner(zoo, UserType.visitor);
+        AnimalCommandRunner commandRunner = new VisitorAnimalCommandRunner(zoo, UserType.visitor);
         commandRunner.runCommands();
     }
 
