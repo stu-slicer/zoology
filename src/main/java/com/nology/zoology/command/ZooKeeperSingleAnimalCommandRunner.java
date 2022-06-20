@@ -1,4 +1,4 @@
-package com.nology.zoology.user.command;
+package com.nology.zoology.command;
 
 import com.nology.zoology.animal.Animal;
 import com.nology.zoology.zoo.Zoo;
@@ -6,16 +6,15 @@ import com.nology.zoology.zoo.Zoo;
 /**
  * Command runner for a single {@link Animal}.
  */
-public class VisitorSingleAnimalCommandRunner extends SingleAnimalCommandRunner {
+public class ZooKeeperSingleAnimalCommandRunner extends SingleAnimalCommandRunner {
 
     private static final String[] SINGLE_ANIMAL_COMMANDS = {
-            "Pet animal",
-            "Give star",
+            "Feed animal",
             "Visit another animal",
             "Exit"
     };
 
-    public VisitorSingleAnimalCommandRunner(Zoo zoo, Animal animal) {
+    public ZooKeeperSingleAnimalCommandRunner(Zoo zoo, Animal animal) {
         super(SINGLE_ANIMAL_COMMANDS, zoo, animal);
         this.zoo = zoo;
         this.animal = animal;
@@ -30,9 +29,9 @@ public class VisitorSingleAnimalCommandRunner extends SingleAnimalCommandRunner 
         System.out.println("Performing user selection " + userSelection);
         switch (userSelection) {
             case 1:
-                petAnimal();
+                feedAnimal();
                 break;
-            case 3:
+            case 2:
                 switchAnimal();
                 break;
         }

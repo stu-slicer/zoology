@@ -3,10 +3,10 @@ package com.nology;
 import com.nology.zoology.animal.loader.CSVAnimalLoader;
 import com.nology.zoology.animal.loader.RandomAnimalLoader;
 import com.nology.zoology.user.UserType;
-import com.nology.zoology.user.command.AnimalCommandRunner;
-import com.nology.zoology.user.command.SingleAnimalCommandRunner;
-import com.nology.zoology.user.command.UserCommandRunner;
-import com.nology.zoology.user.command.ZooKeeperSingleAnimalCommandRunner;
+import com.nology.zoology.command.AnimalCommandRunner;
+import com.nology.zoology.command.SingleAnimalCommandRunner;
+import com.nology.zoology.command.UserCommandRunner;
+import com.nology.zoology.command.ZooKeeperSingleAnimalCommandRunner;
 import com.nology.zoology.zoo.Zoo;
 
 import java.util.Random;

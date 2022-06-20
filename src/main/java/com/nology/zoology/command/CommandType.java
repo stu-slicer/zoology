@@ -1,4 +1,4 @@
-package com.nology.zoology.user.command;
+package com.nology.zoology.command;
 
 public enum CommandType {
 
