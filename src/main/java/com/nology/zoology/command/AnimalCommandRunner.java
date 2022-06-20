@@ -19,6 +19,7 @@ public class AnimalCommandRunner extends CommandRunner {
         "List all animals",
         "List animals by type",
         "List animals by stars",
+        "List most popular animals",
         "Visit an animal",
         "Exit"
     };
@@ -90,6 +91,9 @@ public class AnimalCommandRunner extends CommandRunner {
                 listAllAnimalsByStars();
                 break;
             case 4:
+                zoo.getMostPopularAnimals(10);
+                break;
+            case 5:
                 runSingleAnimalCommands();
                 break;
         }
