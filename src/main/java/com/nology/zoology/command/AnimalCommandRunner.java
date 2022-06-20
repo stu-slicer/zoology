@@ -55,6 +55,20 @@ public class AnimalCommandRunner extends CommandRunner {
         }
     }
 
+    protected void listMostPopularAnimals() {
+        printMessage("Most popular animals in the zoo:");
+        for (Animal zooAnimal : this.zoo.getMostPopularAnimals(10)) {
+            System.out.println(zooAnimal.getInformation());
+        }
+    }
+
+    protected void listHungriestAnimals() {
+        printMessage("Hungriest animals in the zoo:");
+        for (Animal zooAnimal : this.zoo.getHungeriestAniamls()) {
+            System.out.println(zooAnimal.getInformation());
+        }
+    }
+
     protected void runSingleAnimalCommands() {
         SingleAnimalCommandRunner commandRunner = null;
         switch (userType) {
@@ -91,7 +105,7 @@ public class AnimalCommandRunner extends CommandRunner {
                 listAllAnimalsByStars();
                 break;
             case 4:
-                zoo.getMostPopularAnimals(10);
+                listMostPopularAnimals();
                 break;
             case 5:
                 runSingleAnimalCommands();
