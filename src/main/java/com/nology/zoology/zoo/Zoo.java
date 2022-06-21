@@ -4,6 +4,7 @@ import com.nology.zoology.animal.*;
 import com.nology.zoology.animal.loader.AnimalLoader;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Zoo {
 
@@ -90,6 +91,21 @@ public class Zoo {
                 Collections.sort(animals);
         }
         return List.copyOf( animals );
+    }
+
+    public List<Animal> getMostPopularAnimals(int top) {
+        return this.animals.stream()
+                .filter( a -> a.getStars() > 0 )
+                .sorted( (a,b) -> b.getStars() - a.getStars() ) // reversed!
+                .limit(top)
+                .collect(Collectors.toList());
+    }
+
+    public List<Animal> getHungeriestAniamls() {
+        return this.animals.stream()
+                .filter( a -> a.getHunger() > 30 )
+                .sorted( (a,b) -> b.getHunger() - a.getHunger()  )
+                .collect(Collectors.toList());
     }
 
     public Optional<Animal> findAnimalById(int id) {
