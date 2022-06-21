@@ -19,7 +19,7 @@ public class Zoo {
 
     private AnimalLoader animalLoader;
 
-    private IncreaseHungerThread increaseHungerThread;
+    private IncreaseHungerThreadRunner increaseHungerThreadRunner;
     private Thread hungerThread;
 
     public Zoo(AnimalLoader animalLoader) {
@@ -30,8 +30,8 @@ public class Zoo {
             addAnimalToMaps(animalToLoad );
         }
 
-        increaseHungerThread = new IncreaseHungerThread(this.animals);
-        hungerThread = new Thread(increaseHungerThread);
+        increaseHungerThreadRunner = new IncreaseHungerThreadRunner(this.animals);
+        hungerThread = new Thread(increaseHungerThreadRunner);
         hungerThread.start();
 
     }

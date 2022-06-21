@@ -1,14 +1,15 @@
 package com.nology.zoology.zoo;
 
+import com.nology.ColourUtils;
 import com.nology.zoology.animal.Animal;
 
 import java.util.List;
 
-public class IncreaseHungerThread implements Runnable {
+public class IncreaseHungerThreadRunner implements Runnable {
 
     private List<Animal> animals;
 
-    public IncreaseHungerThread(List<Animal> animals) {
+    public IncreaseHungerThreadRunner(List<Animal> animals) {
         this.animals = animals;
     }
 
@@ -28,7 +29,7 @@ public class IncreaseHungerThread implements Runnable {
                 break;
             }
 
-            System.out.println("Those animals are getting hungry...");
+            System.out.println(ColourUtils.blue("Those animals are getting hungry..."));
             increaseHunger();
 
         }
