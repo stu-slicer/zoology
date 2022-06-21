@@ -10,6 +10,7 @@ public class ZooKeeperAnimalCommandRunner extends AnimalCommandRunner {
             "List animals by type",
             "List animals by stars",
             "List hungriest animals",
+            "Feed hungriest animals",
             "List most popular animals",
             "Visit an animal",
             "Exit"
@@ -40,9 +41,12 @@ public class ZooKeeperAnimalCommandRunner extends AnimalCommandRunner {
                 listHungriestAnimals();
                 break;
             case 5:
-                listMostPopularAnimals();
+                feedHungriestAnimals();
                 break;
             case 6:
+                listMostPopularAnimals();
+                break;
+            case 7:
                 runSingleAnimalCommands();
                 break;
         }

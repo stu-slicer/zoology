@@ -55,9 +55,18 @@ public abstract class AnimalCommandRunner extends CommandRunner {
 
     protected void listHungriestAnimals() {
         printMessage("Hungriest animals in the zoo:");
-        for (Animal zooAnimal : this.zoo.getHungeriestAniamls()) {
+        for (Animal zooAnimal : this.zoo.getHungeriestAniamls(40)) {
             System.out.println(zooAnimal.getInformation());
         }
+    }
+
+    protected void feedHungriestAnimals() {
+        printMessage("Hungriest animals in the zoo:");
+        List<Animal> hungeriestAniamls = this.zoo.getHungeriestAniamls(40);
+        for (Animal zooAnimal : hungeriestAniamls) {
+            zooAnimal.feed();
+        }
+        printMessage(String.format("Fed %d animals!", hungeriestAniamls.size()));
     }
 
     protected void runSingleAnimalCommands() {

@@ -101,9 +101,9 @@ public class Zoo {
                 .collect(Collectors.toList());
     }
 
-    public List<Animal> getHungeriestAniamls() {
+    public List<Animal> getHungeriestAniamls(int threshold) {
         return this.animals.stream()
-                .filter( a -> a.getHunger() > 30 )
+                .filter( a -> a.getHunger() > threshold )
                 .sorted( (a,b) -> b.getHunger() - a.getHunger()  )
                 .collect(Collectors.toList());
     }
