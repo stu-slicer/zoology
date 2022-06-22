@@ -1,4 +1,4 @@
-package com.nology;
+package com.nology.zoology.user;
 
 public class ZooPlayground {
 
