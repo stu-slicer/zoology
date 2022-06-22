@@ -29,4 +29,9 @@ public class Llama {
     public void setAge(int age) {
         this.age = age;
     }
+
+    public void makeSound() {
+        System.out.println("Spit!");
+    }
+
 }

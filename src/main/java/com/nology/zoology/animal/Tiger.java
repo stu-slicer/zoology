@@ -29,4 +29,8 @@ public class Tiger {
     public void setAge(int age) {
         this.age = age;
     }
+
+    public void makeSound() {
+        System.out.println("Grrrrrr!");
+    }
 }
