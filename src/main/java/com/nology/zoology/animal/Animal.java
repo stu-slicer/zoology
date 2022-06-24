@@ -2,9 +2,14 @@ package com.nology.zoology.animal;
 
 public class Animal {
 
+    private static final int HUNGER_LEVEL = 40;
+
     protected int id;
     protected String name;
     protected int age;
+    protected boolean pettable;
+    protected int popularity;
+    protected short hunger = 50;
 
     public Animal(int id, String name, int age) {
         this.id = id;
@@ -36,8 +41,41 @@ public class Animal {
         this.age = age;
     }
 
+    public boolean isPettable() {
+        return pettable;
+    }
+
+    public void setPettable(boolean pettable) {
+        this.pettable = pettable;
+    }
+
+    public int getPopularity() {
+        return popularity;
+    }
+
+    public short getHunger() {
+        return hunger;
+    }
+
+    /**
+     * For Testing
+     * @param hunger
+     */
+    void setHunger(short hunger) {
+        this.hunger = hunger;
+    }
+
+    public boolean isHungry() {
+        return this.hunger >= HUNGER_LEVEL;
+    }
+
+    public void feed() {
+        hunger -= 10;
+        makeSound();
+    }
+
     public void makeSound() {
-        System.out.println("They same nothing..."); // silence
+        System.out.println("They say nothing..."); // silence
     }
 
     @Override
