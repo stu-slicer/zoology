@@ -21,6 +21,8 @@ public class Zoo {
 
     private IncreaseHungerThreadRunner increaseHungerThreadRunner;
     private Thread hungerThread;
+    private DecreaseStarThreadRunner decreaseStarThreadRunner;
+    private Thread starsThread;
 
     public Zoo(AnimalLoader animalLoader) {
         this.animalLoader = animalLoader;
@@ -32,16 +34,23 @@ public class Zoo {
 
         increaseHungerThreadRunner = new IncreaseHungerThreadRunner(this.animals);
         hungerThread = new Thread(increaseHungerThreadRunner);
+
+        decreaseStarThreadRunner = new DecreaseStarThreadRunner(this.animals);
+        starsThread = new Thread( decreaseStarThreadRunner);
+
         hungerThread.start();
+        starsThread.start();
 
     }
 
     public void stopThreads() {
         System.out.println("Closing down!");
         hungerThread.interrupt();
+        starsThread.interrupt();
         try {
             hungerThread.join();
-            System.out.println("... waiting for the thread to stop...");
+            starsThread.join();
+            System.out.println("... waiting for the thread(s) to stop...");
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

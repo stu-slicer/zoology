@@ -97,6 +97,12 @@ public abstract class Animal implements Comparable<Animal>, Starrable {
         return this.stars;
     }
 
+    @Override
+    public void removeStar() {
+        this.stars = Math.max( this.stars - 1, 0 );
+        this.popularity = Math.max( popularity - 10, 0 );
+    }
+
     public abstract void makeSound();
 
     public String getInformation() {

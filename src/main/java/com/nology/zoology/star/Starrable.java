@@ -8,4 +8,6 @@ public interface Starrable {
     void receiveStar(int stars);
     int getStars();
 
+    void removeStar();
+
 }
