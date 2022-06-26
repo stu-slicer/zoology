@@ -115,9 +115,9 @@ public abstract class AnimalCommandRunner extends CommandRunner {
         return HandleUserSelection.moreCommands;
     }
 
-    @Override
-    protected void performExit() {
-        this.zoo.stopThreads();
-        super.performExit();
-    }
+//    @Override
+//    protected void performExit() {
+//        this.zoo.shutdownZoo();
+//        super.performExit();
+//    }
 }

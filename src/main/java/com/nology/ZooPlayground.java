@@ -3,6 +3,8 @@ package com.nology;
 import com.nology.zoology.animal.loader.CSVAnimalLoader;
 import com.nology.zoology.animal.loader.RandomAnimalLoader;
 import com.nology.zoology.command.*;
+import com.nology.zoology.data.CSVZooDataLoader;
+import com.nology.zoology.data.ZooDataLoader;
 import com.nology.zoology.user.UserType;
 import com.nology.zoology.zoo.Zoo;
 
@@ -17,7 +19,10 @@ public class ZooPlayground {
         RandomAnimalLoader randomAnimalLoader = new RandomAnimalLoader();
         CSVAnimalLoader csvAnimalLoader = new CSVAnimalLoader("src/main/resources/animals-to-load.csv");
 
-        Zoo zoo = new Zoo( randomAnimalLoader );
+        ZooDataLoader zooDataLoader = new CSVZooDataLoader( CSVZooDataLoader.DEFAULT_DATA_FILE );
+
+        Zoo zoo = new Zoo( randomAnimalLoader, zooDataLoader );
+
 
         System.out.println( zoo.getAnimalCount() );
 

@@ -52,4 +52,9 @@ public class UserCommandRunner extends CommandRunner {
         return HandleUserSelection.moreCommands;
     }
 
+    @Override
+    protected void performExit() {
+        this.zoo.shutdownZoo();
+        super.performExit();
+    }
 }
