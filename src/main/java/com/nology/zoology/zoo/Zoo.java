@@ -2,11 +2,16 @@ package com.nology.zoology.zoo;
 
 import com.nology.zoology.animal.*;
 import com.nology.zoology.animal.loader.AnimalLoader;
+import com.nology.zoology.data.ZooDataLoader;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Zoo {
+
+    public enum AnimalGeneration {
+        fromLoader, fromPreviousGame;
+    }
 
     private ArrayList<Animal> animals = new ArrayList<>();
 
@@ -17,15 +22,50 @@ public class Zoo {
 
     private Map<String, List<Animal>> nameMap = new HashMap<>();
 
+    private ZooDataLoader zooDataLoader;
     private AnimalLoader animalLoader;
+
+    private AnimalGeneration animalGeneration = AnimalGeneration.fromPreviousGame;
 
     public Zoo(AnimalLoader animalLoader) {
         this.animalLoader = animalLoader;
-        List<Animal> toLoad = animalLoader.loadAnimals();
+    }
+
+    public Zoo(AnimalLoader animalLoader, ZooDataLoader zooDataLoader) {
+        this(animalLoader);
+        this.zooDataLoader = zooDataLoader;
+
+        final List<Animal> toLoad = loadAnimals();
+
         for (Animal animalToLoad : toLoad) {
             this.animals.add( animalToLoad );
-            addAnimalToMaps(animalToLoad );
+            addAnimalToMaps( animalToLoad );
         }
+
+        if( zooDataLoader != null ) {
+            this.zooDataLoader.saveAnimalData(animals);
+        }
+
+    }
+
+    public void shutdownZoo() {
+        if (this.zooDataLoader != null) {
+            this.zooDataLoader.saveAnimalData( this.animals );
+        }
+    }
+
+    private List<Animal> loadAnimals() {
+        List<Animal> toLoad = null;
+
+        if( animalGeneration == AnimalGeneration.fromPreviousGame && this.zooDataLoader != null ) {
+            toLoad = zooDataLoader.loadAnimalData();
+            System.out.println("Animals loaded from previous game");
+        } else {
+            toLoad = animalLoader.loadAnimals();
+            System.out.println("Animals loaded from loader");
+        }
+
+        return toLoad;
     }
 
     public void addAnimal(Animal animal) {
@@ -97,4 +137,7 @@ public class Zoo {
         return this.nameMap.getOrDefault( name.toLowerCase(), new ArrayList<>() );
     }
 
+    public void setZooDataLoader(ZooDataLoader zooDataLoader) {
+        this.zooDataLoader = zooDataLoader;
+    }
 }

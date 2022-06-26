@@ -68,7 +68,7 @@ public class AnimalBuilder {
         if( this.hunger == null ) {
             throw new IllegalStateException("Please give a Hunger percentage!");
         }
-        Animal built = null;
+        Animal built;
         switch (type) {
             case tiger:
                 built = new Tiger(this.id, this.name, this.age);
@@ -81,6 +81,11 @@ public class AnimalBuilder {
             case crocodile:
                 built = new Crocodile(this.id, this.name, this.age);
                 break;
+
+            case lion:
+                built = new Lion(this.id, this.name, this.age);
+                break;
+
             default:
                 throw new IllegalStateException("Sorry don't know how to make " + type);
         }
@@ -93,6 +98,7 @@ public class AnimalBuilder {
 
     public static AnimalBuilder animal(String name) {
         AnimalBuilder builder = new AnimalBuilder();
+        builder.name = name;
         return builder;
     }
 

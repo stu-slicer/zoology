@@ -5,11 +5,15 @@ import com.nology.zoology.animal.*;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
+import java.nio.file.OpenOption;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CSVZooDataLoader implements ZooDataLoader {
+
+    public static final String DEFAULT_DATA_FILE = "src/main/resources/zoology-data-file.csv";
 
     private static int ANIMAL_ID = 0;
     private static int ANIMAL_TYPE = 1;
@@ -20,7 +24,7 @@ public class CSVZooDataLoader implements ZooDataLoader {
     private static int ANIMAL_HUNGER = 6;
     private static int ANIMAL_PETTABLE = 7;
 
-    private String filePath;
+    private String filePath = DEFAULT_DATA_FILE;
 
     public CSVZooDataLoader(String filePath) {
         this.filePath = filePath;
@@ -50,6 +54,8 @@ public class CSVZooDataLoader implements ZooDataLoader {
             sb.append(animal.isPettable());
             lines.add( sb.toString() );
         }
+
+        saveLinesToFile(lines);
     }
 
     @Override
@@ -91,6 +97,14 @@ public class CSVZooDataLoader implements ZooDataLoader {
         try {
             List<String> lines = Files.readAllLines(Path.of(this.filePath));
             return lines;
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
+
+    private void saveLinesToFile(List<String> lines) {
+        try {
+            Files.write(Path.of(this.filePath), lines, StandardOpenOption.CREATE, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }

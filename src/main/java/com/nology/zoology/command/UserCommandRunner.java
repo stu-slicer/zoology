@@ -29,6 +29,8 @@ public class UserCommandRunner extends CommandRunner {
         commandRunner.runCommands();
     }
 
+
+
     @Override
     protected void beforeCommands() {
     }
@@ -36,6 +38,9 @@ public class UserCommandRunner extends CommandRunner {
     @Override
     protected boolean handleUserSelection(int userSelection) {
         if( userSelection == USER_COMMANDS.length ) {
+
+            zoo.shutdownZoo();
+
             return false;
         }
 
