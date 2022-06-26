@@ -63,8 +63,16 @@ public abstract class Animal implements Comparable<Animal>, Starrable {
         return popularity;
     }
 
+    void setPopularity(int popularity) {
+        this.popularity = popularity;
+    }
+
     public short getHunger() {
         return hunger;
+    }
+
+    void setHunger(short hunger) {
+        this.hunger = hunger;
     }
 
     public void feed() {
@@ -95,6 +103,10 @@ public abstract class Animal implements Comparable<Animal>, Starrable {
     @Override
     public int getStars() {
         return this.stars;
+    }
+
+    void setStars(int stars) {
+        this.stars = stars;
     }
 
     public abstract void makeSound();
