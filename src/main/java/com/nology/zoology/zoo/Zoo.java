@@ -60,10 +60,15 @@ public class Zoo {
         if( animalGeneration == AnimalGeneration.fromPreviousGame && this.zooDataLoader != null ) {
             toLoad = zooDataLoader.loadAnimalData();
             System.out.println("Animals loaded from previous game");
-        } else {
-            toLoad = animalLoader.loadAnimals();
-            System.out.println("Animals loaded from loader");
+
+            if( ! toLoad.isEmpty() ) {
+                return toLoad;
+            }
+            // if nothing loaded (no file) then get animals using AnimalLoader.
         }
+
+        toLoad = animalLoader.loadAnimals();
+        System.out.println("Animals loaded from loader");
 
         return toLoad;
     }
