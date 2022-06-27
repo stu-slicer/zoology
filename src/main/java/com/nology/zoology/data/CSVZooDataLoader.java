@@ -13,7 +13,7 @@ import java.util.List;
 
 public class CSVZooDataLoader implements ZooDataLoader {
 
-    public static final String DEFAULT_DATA_FILE = "src/main/resources/zoology-data-file.csv";
+    public static final String DEFAULT_DATA_FILE = "data-output/zoology-data-file.csv";
 
     private static int ANIMAL_ID = 0;
     private static int ANIMAL_TYPE = 1;
@@ -95,8 +95,11 @@ public class CSVZooDataLoader implements ZooDataLoader {
 
     private List<String> loadLinesFromFile() {
         try {
-            List<String> lines = Files.readAllLines(Path.of(this.filePath));
-            return lines;
+            if( Files.exists( Path.of( this.filePath ) ) ) {
+                List<String> lines = Files.readAllLines(Path.of(this.filePath));
+                return lines;
+            }
+            return new ArrayList<>();
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
