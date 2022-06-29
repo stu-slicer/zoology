@@ -16,7 +16,6 @@ public class AnimalUtils {
         names.add("Alfred");
         names.add("Beth");
         names.add("Bob");
-        names.add("Bob");
         names.add("Bonzo");
         names.add("Butch");
         names.add("Charlotte");
@@ -37,7 +36,7 @@ public class AnimalUtils {
         names.add("Nigel");
         names.add("Rex");
         names.add("Roger");
-        names.add("Scobbie");
+        names.add("Scoobie");
         names.add("Spangle");
         names.add("Star");
         names.add("Sydney");
