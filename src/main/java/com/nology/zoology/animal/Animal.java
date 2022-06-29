@@ -2,12 +2,14 @@ package com.nology.zoology.animal;
 
 public abstract class Animal {
 
+    private static final int HUNGER_LEVEL = 40;
+
     protected int id;
     protected String name;
     protected int age;
     protected boolean pettable;
     protected int popularity;
-    protected short hunger;
+    protected short hunger = 50;
 
     public Animal(int id, String name, int age) {
         this.id = id;
@@ -62,8 +64,20 @@ public abstract class Animal {
         return hunger;
     }
 
+    /**
+     * For Testing
+     * @param hunger
+     */
+    void setHunger(short hunger) {
+        this.hunger = hunger;
+    }
+
+    public boolean isHungry() {
+        return this.hunger >= HUNGER_LEVEL;
+    }
+
     public void feed() {
-        hunger += 10;
+        hunger -= 10;
         makeSound();
     }
 
