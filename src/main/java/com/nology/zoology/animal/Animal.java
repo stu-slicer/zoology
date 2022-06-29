@@ -1,6 +1,6 @@
 package com.nology.zoology.animal;
 
-public class Animal {
+public abstract class Animal {
 
     private static final int HUNGER_LEVEL = 40;
 
@@ -16,6 +16,13 @@ public class Animal {
         this.name = name;
         this.age = age;
     }
+
+    public Animal(int id, String name, int age, boolean pettable) {
+        this(id, name, age);
+        this.pettable = pettable;
+    }
+
+    public abstract AnimalType getType();
 
     public int getId() {
         return id;
@@ -74,9 +81,7 @@ public class Animal {
         makeSound();
     }
 
-    public void makeSound() {
-        System.out.println("They say nothing..."); // silence
-    }
+    public abstract void makeSound();
 
     @Override
     public String toString() {

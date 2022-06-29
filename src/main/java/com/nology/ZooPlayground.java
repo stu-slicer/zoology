@@ -16,18 +16,18 @@ public class ZooPlayground {
         System.out.println(tiger);
 
         Zoo zoo = new Zoo();
-        // three tigers
-        for (int i = 0; i < 3; i++) {
-            zoo.addAnimal(new Tiger( AnimalUtils.nextUniqueId(), AnimalUtils.generateName(), AnimalUtils.generateAge() ));
-        }
-        // five llamas
-        for (int i = 0; i < 5; i++) {
-            zoo.addAnimal(new Llama( AnimalUtils.nextUniqueId(), AnimalUtils.generateName(), AnimalUtils.generateAge() ));
-        }
-        // 2 crocodiles
-        for (int i = 0; i < 5; i++) {
-            zoo.addAnimal(new Crocodile( AnimalUtils.nextUniqueId(), AnimalUtils.generateName(), AnimalUtils.generateAge() ));
-        }
+//        // three tigers
+//        for (int i = 0; i < 3; i++) {
+//            zoo.addAnimal(new Tiger( AnimalUtils.nextUniqueId(), AnimalUtils.generateName(), AnimalUtils.generateAge() ));
+//        }
+//        // five llamas
+//        for (int i = 0; i < 5; i++) {
+//            zoo.addAnimal(new Llama( AnimalUtils.nextUniqueId(), AnimalUtils.generateName(), AnimalUtils.generateAge() ));
+//        }
+//        // 2 crocodiles
+//        for (int i = 0; i < 5; i++) {
+//            zoo.addAnimal(new Crocodile( AnimalUtils.nextUniqueId(), AnimalUtils.generateName(), AnimalUtils.generateAge() ));
+//        }
 
         // or random!
         for (int i = 0; i < 10; i++) {
@@ -45,6 +45,8 @@ public class ZooPlayground {
         }
 
         System.out.println( zoo.getAnimalCount() );
+
+        zoo.listAnimals();
     }
 
 
