@@ -46,7 +46,7 @@ public class ZooPlayground {
 
         System.out.println( zoo.getAnimalCount() );
 
-        zoo.listAnimals();
+        zoo.listAnimals( AnimalSorting.byType );
     }
 
 

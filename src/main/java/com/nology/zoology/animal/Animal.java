@@ -1,6 +1,8 @@
 package com.nology.zoology.animal;
 
-public abstract class Animal {
+import java.util.Comparator;
+
+public abstract class Animal implements Comparable<Animal> {
 
     private static final int HUNGER_LEVEL = 40;
 
@@ -82,6 +84,12 @@ public abstract class Animal {
     }
 
     public abstract void makeSound();
+
+    @Override
+    public int compareTo(Animal other) {
+        // order by id
+        return this.id - other.id;
+    }
 
     @Override
     public String toString() {
