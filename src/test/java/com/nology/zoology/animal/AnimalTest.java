@@ -5,7 +5,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@ExtendWith( AnimalBeforeEachCallback.class )
 class AnimalTest {
 
     private static final int ANIMAL_ID = 1;
@@ -21,7 +20,7 @@ class AnimalTest {
     @BeforeEach
     void setUp() {
         System.out.println("Creating new Animal");
-        this.target = new Animal( ANIMAL_ID, ANIMAL_NAME, ANIMAL_AGE );
+        this.target = buildAnonymousAnimal( ANIMAL_ID, ANIMAL_NAME, ANIMAL_AGE );
     }
 
     @AfterEach
@@ -79,6 +78,20 @@ class AnimalTest {
 
     @Test
     void testToString() {
-        assertEquals("Animal[id=1, name='George', age=7]", target.toString());
+        assertEquals("[id=1, name='George', age=7]", target.toString());
+    }
+
+    private Animal buildAnonymousAnimal(int id, String name, int age) {
+        return new Animal(id, name, age) {
+            @Override
+            public AnimalType getType() {
+                return AnimalType.lion;
+            }
+
+            @Override
+            public void makeSound() {
+                System.out.println("Roarrrrrr!!");
+            }
+        };
     }
 }
