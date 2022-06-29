@@ -25,20 +25,24 @@ public class Zoo {
         return this.animals.size();
     }
 
-public void listAnimals(AnimalSorting animalSorting) {
-    switch (animalSorting) {
-        case byName:
-            Collections.sort( animals, new SortByAnimalName() );
-            break;
-        case byType:
-            Collections.sort( animals, new SortByAnimalTypeThenName() );
-            break;
-        default:
-            Collections.sort( animals );
+    public void listAnimals() {
+        listAnimals(AnimalSorting.byName);
     }
-    for (Animal animal : animals) {
-        System.out.println("Animal: " + animal);
+
+    public void listAnimals(AnimalSorting animalSorting) {
+        switch (animalSorting) {
+            case byName:
+                Collections.sort(animals, new SortByAnimalName());
+                break;
+            case byType:
+                Collections.sort(animals, new SortByAnimalTypeThenName());
+                break;
+            default:
+                Collections.sort(animals);
+        }
+        for (Animal animal : animals) {
+            System.out.println("Animal: " + animal);
+        }
     }
-}
 
 }
