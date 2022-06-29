@@ -50,25 +50,22 @@ public class User {
     }
 
     /**
-     * Complete the canAuthenticate() method.
-     *
      * It should return true if the user's password is not null and not an empty String, otherwise it should return false.
      *
      * @return true if user's password is not null and not an empty String, otherwise false.
      */
     public boolean canAuthenticate() {
-        throw new UnsupportedOperationException("No implemented yet");
+        return this.password != null && ! "".equals( this.password.trim() );
     }
+
     /**
-     * Complete the #isValidEmail() method.
-     *
      * Should return true if the user's email address is not null and not an empty String.
      * Bonus: Validate the format of the email address.
      *
      * @return true if the user's email address is not null and not an empty String.
      */
     public boolean isValidEmail() {
-        throw new UnsupportedOperationException("No implemented yet");
+        return this.email != null && ! "".equals( this.email.trim() );
     }
 
     /**
@@ -81,8 +78,10 @@ public class User {
      * @return true if the password given equals the user's password.
      */
     public boolean authenticate(String password) {
-        throw new UnsupportedOperationException("No implemented yet");
+        if( this.canAuthenticate() ) {
+            return this.password.equals( password );
+        }
+        return false;
     }
-
 
 }
