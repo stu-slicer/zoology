@@ -1,5 +1,6 @@
 package com.nology.zoology.animal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nology.ColourUtils;
 import com.nology.zoology.star.StarUtils;
 import com.nology.zoology.star.Starrable;
@@ -117,6 +118,7 @@ public abstract class Animal implements Comparable<Animal>, Starrable {
 
     public abstract void makeSound();
 
+    @JsonIgnore
     public String getInformation() {
         return ColourUtils.red(this.name) + String.format(" (#%d), a %s, is %d years old, popularity %d%%, stars %s, hunger %d%%",
                 this.id, getType(), this.age, this.popularity, StarUtils.printStars(this, 10), this.hunger);

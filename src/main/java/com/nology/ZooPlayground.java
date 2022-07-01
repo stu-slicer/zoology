@@ -4,13 +4,14 @@ import com.nology.zoology.command.UserCommandRunner;
 import com.nology.zoology.zoo.Zoo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 
 /**
  * Implements {@link CommandLineRunner} so run methods is run immediately after Spring has built and configured the application.
  * This is the way into the Zoo!
+ * @deprecated no longer needed as this is now a backend server!
  */
-@Component
+//@Component
+    @Deprecated
 public class ZooPlayground implements CommandLineRunner {
 
     @Autowired
