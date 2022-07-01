@@ -67,21 +67,21 @@ public abstract class Animal implements Comparable<Animal>, Starrable {
         this.popularity = popularity;
     }
 
-    public short getHunger() {
+    public synchronized short getHunger() {
         return hunger;
     }
 
-    void setHunger(short hunger) {
+    synchronized void setHunger(short hunger) {
         this.hunger = hunger;
     }
 
-    public void feed() {
+    public synchronized void feed() {
         hunger -= getType().getFeedHungerDecrease();
         this.hunger = (short) Math.max( 0, hunger );
         makeSound();
     }
 
-    public void increaseHunger() {
+    public synchronized void increaseHunger() {
         hunger = (short) Math.min( 100, hunger + getType().getRateOfHunger() );
     }
 
