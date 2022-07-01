@@ -1,35 +1,25 @@
 package com.nology;
 
-import com.nology.zoology.animal.loader.CSVAnimalLoader;
-import com.nology.zoology.animal.loader.RandomAnimalLoader;
-import com.nology.zoology.command.*;
-import com.nology.zoology.data.CSVZooDataLoader;
-import com.nology.zoology.data.ZooDataLoader;
-import com.nology.zoology.user.UserType;
+import com.nology.zoology.command.UserCommandRunner;
 import com.nology.zoology.zoo.Zoo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
 
-import java.util.Random;
+/**
+ * Implements {@link CommandLineRunner} so run methods is run immediately after Spring has built and configured the application.
+ * This is the way into the Zoo!
+ */
+@Component
+public class ZooPlayground implements CommandLineRunner {
 
-public class ZooPlayground {
+    @Autowired
+    private Zoo zoo;
 
-    private static final Random RANDOM = new Random();
-
-    public static void main(String[] args) {
-
-        RandomAnimalLoader randomAnimalLoader = new RandomAnimalLoader();
-        CSVAnimalLoader csvAnimalLoader = new CSVAnimalLoader("src/main/resources/animals-to-load.csv");
-
-        ZooDataLoader zooDataLoader = new CSVZooDataLoader( CSVZooDataLoader.DEFAULT_DATA_FILE );
-
-        Zoo zoo = new Zoo( randomAnimalLoader, zooDataLoader );
-
-
-        System.out.println( zoo.getAnimalCount() );
+    @Override
+    public void run(String... args) throws Exception {
 
         UserCommandRunner userCommandRunner = new UserCommandRunner(zoo);
-        AnimalCommandRunner keeperAnimalCommandRunner = new ZooKeeperAnimalCommandRunner(zoo, UserType.visitor);
-        AnimalCommandRunner visitorAnimalCommandRunner = new VisitorAnimalCommandRunner(zoo, UserType.visitor);
-        SingleAnimalCommandRunner singleAnimalCommandRunner = new ZooKeeperSingleAnimalCommandRunner(zoo, null);
 
         userCommandRunner.runCommands();
 

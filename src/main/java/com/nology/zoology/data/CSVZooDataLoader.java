@@ -1,16 +1,20 @@
 package com.nology.zoology.data;
 
-import com.nology.zoology.animal.*;
+import com.nology.zoology.animal.Animal;
+import com.nology.zoology.animal.AnimalBuilder;
+import com.nology.zoology.animal.AnimalType;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
-import java.nio.file.OpenOption;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class CSVZooDataLoader implements ZooDataLoader {
 
     public static final String DEFAULT_DATA_FILE = "data-output/zoology-data-file.csv";
@@ -24,11 +28,12 @@ public class CSVZooDataLoader implements ZooDataLoader {
     private static int ANIMAL_HUNGER = 6;
     private static int ANIMAL_PETTABLE = 7;
 
+    @Value("${csv-data-loader-file}")
     private String filePath = DEFAULT_DATA_FILE;
 
-    public CSVZooDataLoader(String filePath) {
-        this.filePath = filePath;
-    }
+//    public CSVZooDataLoader(String filePath) {
+//        this.filePath = filePath;
+//    }
 
     @Override
     public void saveAnimalData(List<Animal> animals) {
@@ -111,5 +116,13 @@ public class CSVZooDataLoader implements ZooDataLoader {
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
+    }
+
+    /**
+     * for Testing!
+     * @param filePath
+     */
+    void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 }

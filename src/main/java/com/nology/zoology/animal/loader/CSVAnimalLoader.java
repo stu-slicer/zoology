@@ -1,6 +1,7 @@
 package com.nology.zoology.animal.loader;
 
 import com.nology.zoology.animal.*;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -11,11 +12,12 @@ import java.util.List;
 
 public class CSVAnimalLoader implements AnimalLoader {
 
+    @Value("${csv-animal-loader}")
     private String filePath;
 
-    public CSVAnimalLoader(String filePath) {
-        this.filePath = filePath;
-    }
+//    public CSVAnimalLoader(String filePath) {
+//        this.filePath = filePath;
+//    }
 
     @Override
     public List<Animal> loadAnimals() {

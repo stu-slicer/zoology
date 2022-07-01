@@ -3,11 +3,19 @@ package com.nology.zoology.zoo;
 import com.nology.zoology.animal.*;
 import com.nology.zoology.animal.loader.AnimalLoader;
 import com.nology.zoology.data.ZooDataLoader;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Component
 public class Zoo {
+
+    private Log log = LogFactory.getLog(Zoo.class);
 
     public enum AnimalGeneration {
         fromLoader, fromPreviousGame;
@@ -23,21 +31,21 @@ public class Zoo {
     private Map<String, List<Animal>> nameMap = new HashMap<>();
 
     private AnimalGeneration animalGeneration = AnimalGeneration.fromPreviousGame;
+
+    @Autowired
     private ZooDataLoader zooDataLoader;
+    @Autowired
     private AnimalLoader animalLoader;
 
+    @Autowired
     private IncreaseHungerThreadRunner increaseHungerThreadRunner;
     private Thread hungerThread;
+    @Autowired
     private DecreaseStarThreadRunner decreaseStarThreadRunner;
     private Thread starsThread;
 
-    public Zoo(AnimalLoader animalLoader) {
-        this.animalLoader = animalLoader;
-    }
-
-    public Zoo(AnimalLoader animalLoader, ZooDataLoader zooDataLoader) {
-        this(animalLoader);
-        this.zooDataLoader = zooDataLoader;
+    @PostConstruct
+    public void loadAndInitialise() {
 
         final List<Animal> toLoad = loadAnimals();
 
@@ -46,14 +54,19 @@ public class Zoo {
             addAnimalToMaps( animalToLoad );
         }
 
+        log.info(String.format("Loaded %d animals", this.animals.size()));
+
         if( zooDataLoader != null ) {
             this.zooDataLoader.saveAnimalData(animals);
         }
 
-        increaseHungerThreadRunner = new IncreaseHungerThreadRunner(this.animals);
+        increaseHungerThreadRunner.setAnimals(this.animals);
         hungerThread = new Thread(increaseHungerThreadRunner);
 
-        decreaseStarThreadRunner = new DecreaseStarThreadRunner(this.animals);
+        log.info(String.format("Hunger thread: hunger increases every %s seconds", increaseHungerThreadRunner.getSleepMs()/1000));
+
+        decreaseStarThreadRunner.setAnimals( this.animals );
+        log.info(String.format("Stars thread: stars are removed every %s seconds", decreaseStarThreadRunner.getSleepMs()/1000));
         starsThread = new Thread( decreaseStarThreadRunner);
 
         hungerThread.start();
@@ -65,7 +78,7 @@ public class Zoo {
 
         if( animalGeneration == AnimalGeneration.fromPreviousGame && this.zooDataLoader != null ) {
             toLoad = zooDataLoader.loadAnimalData();
-            System.out.println("Animals loaded from previous game");
+            log.info("Animals loaded from previous game");
 
             if( ! toLoad.isEmpty() ) {
                 return toLoad;
@@ -74,13 +87,13 @@ public class Zoo {
         }
 
         toLoad = animalLoader.loadAnimals();
-        System.out.println("Animals loaded from loader");
+        log.info("Animals loaded from loader");
 
         return toLoad;
     }
 
     public void shutdownZoo() {
-        System.out.println("shuttimg down threads, saving data and all that jazz");
+        log.info("Shutting down threads, saving data and all that jazz");
         stopThreads();
         if (this.zooDataLoader != null) {
             this.zooDataLoader.saveAnimalData( this.animals );
@@ -88,7 +101,7 @@ public class Zoo {
     }
 
     public void stopThreads() {
-        System.out.println("Closing down!");
+        log.info("Closing down!");
         hungerThread.interrupt();
         starsThread.interrupt();
         try {

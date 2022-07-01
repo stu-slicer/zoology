@@ -36,7 +36,8 @@ class CSVZooDataLoaderTest {
 
         this.workingFile = workingFile;
 
-        target = new CSVZooDataLoader( workingFile.getAbsolutePath() );
+        target = new CSVZooDataLoader();
+        target.setFilePath(  workingFile.getAbsolutePath() );
 
         lion = (Lion) AnimalBuilder.animal("Rex")
                 .withId(3)
