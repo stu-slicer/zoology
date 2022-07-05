@@ -6,6 +6,8 @@ import com.nology.zoology.star.Starrable;
 
 public abstract class Animal implements Comparable<Animal>, Starrable {
 
+    private static final int HUNGER_LEVEL = 40;
+
     protected int id;
     protected String name;
     protected int age;
@@ -40,6 +42,9 @@ public abstract class Animal implements Comparable<Animal>, Starrable {
     }
 
     public void setName(String name) {
+        if( name == null || "".equals(name.trim()) ) {
+            throw new IllegalArgumentException("Name must be a valid name");
+        }
         this.name = name;
     }
 
@@ -48,6 +53,9 @@ public abstract class Animal implements Comparable<Animal>, Starrable {
     }
 
     public void setAge(int age) {
+        if( age < 1 || age > 99 ) {
+            throw new IllegalArgumentException("Age must be betweem 1 and 99 years");
+        }
         this.age = age;
     }
 
@@ -72,7 +80,14 @@ public abstract class Animal implements Comparable<Animal>, Starrable {
     }
 
     synchronized void setHunger(short hunger) {
+        if( hunger < 0 || hunger > 100 ) {
+            throw new IllegalArgumentException("Hunger must be betweem 0 and 100");
+        }
         this.hunger = hunger;
+    }
+
+    public synchronized boolean isHungry() {
+        return this.hunger >= HUNGER_LEVEL;
     }
 
     public synchronized void feed() {
@@ -96,7 +111,10 @@ public abstract class Animal implements Comparable<Animal>, Starrable {
 
     @Override
     public void receiveStar(int stars) {
-        this.stars += stars;
+        if( stars < 1 || stars > 10 ) {
+            throw new IllegalArgumentException("Number of stars must be betweem 1 amd 10");
+        }
+        this.stars = Math.min( this.stars + stars, 10  ); // no more than 10 stars!
         this.popularity = (popularity + (stars * 10)) % 100;
     }
 
