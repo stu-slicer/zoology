@@ -4,12 +4,14 @@ import java.util.Comparator;
 
 public abstract class Animal implements Comparable<Animal> {
 
+    private static final int HUNGER_LEVEL = 40;
+
     protected int id;
     protected String name;
     protected int age;
     protected boolean pettable;
     protected int popularity;
-    protected short hunger;
+    protected short hunger = 50;
 
     public Animal(int id, String name, int age) {
         this.id = id;
@@ -37,6 +39,9 @@ public abstract class Animal implements Comparable<Animal> {
     }
 
     public void setName(String name) {
+        if( name == null || "".equals(name.trim()) ) {
+            throw new IllegalArgumentException("Name must be a valid name");
+        }
         this.name = name;
     }
 
@@ -45,6 +50,9 @@ public abstract class Animal implements Comparable<Animal> {
     }
 
     public void setAge(int age) {
+        if( age < 1 || age > 99 ) {
+            throw new IllegalArgumentException("Age must be betweem 1 and 99 years");
+        }
         this.age = age;
     }
 
@@ -64,12 +72,32 @@ public abstract class Animal implements Comparable<Animal> {
         return hunger;
     }
 
+    /**
+     * For Testing
+     * @param hunger
+     */
+    void setHunger(short hunger) {
+        if( hunger < 0 || hunger > 100 ) {
+            throw new IllegalArgumentException("Hunger must be betweem 0 and 100");
+        }
+        this.hunger = hunger;
+    }
+
+    public boolean isHungry() {
+        return this.hunger >= HUNGER_LEVEL;
+    }
+
     public void feed() {
-        hunger += 10;
+        hunger -= 10;
         makeSound();
     }
 
     public abstract void makeSound();
+
+    public String getInformation() {
+        return String.format("%s, a %s, is %d years old, popularity %d%%, hunger %d%%",
+                this.name, getType(), this.age, this.popularity, this.hunger);
+    }
 
     @Override
     public int compareTo(Animal other) {
