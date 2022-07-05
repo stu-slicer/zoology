@@ -1,7 +1,6 @@
 package com.nology.zoology.animal;
 
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,6 +9,7 @@ class AnimalTest {
     private static final int ANIMAL_ID = 1;
     private static final String ANIMAL_NAME = "George";
     private static final int ANIMAL_AGE = 7;
+    private static final short STANDARD_HUNGER = 50;
 
     private Animal target;
 
@@ -54,6 +54,67 @@ class AnimalTest {
     }
 
     @Test
+    @DisplayName("Set name is successful")
+    void setName_ValidInput_Success() {
+        assertEquals( ANIMAL_NAME, target.getName() );
+        target.setName( "Lotte" );
+        assertEquals( "Lotte", target.getName() );
+    }
+
+    @Test
+    @DisplayName("Set null name throws exception")
+    void setName_Null_ThrowsException() {
+        assertThrows( IllegalArgumentException.class,
+                () -> target.setName(null) );
+    }
+
+    @Test
+    @DisplayName("Set empty string name throws exception")
+    void setName_EmptyString_ThrowsException() {
+        assertThrows( IllegalArgumentException.class,
+                () -> target.setName("") );
+    }
+
+    @Test
+    @DisplayName("Set age is successful")
+    void setAge_ValidInput_Success() {
+        assertEquals( ANIMAL_AGE, target.getAge() );
+        target.setAge( 42 );
+        assertEquals( 42, target.getAge() );
+    }
+
+    @Test
+    @DisplayName("Set age to 0 throws exception")
+    void setAge_ZeroInput_ThrowsException() {
+         assertThrows( IllegalArgumentException.class,
+                () -> target.setAge(0) );
+    }
+
+    @Test
+    @DisplayName("Set age to 101 throws exception")
+    void setAge_InvalidInput_ThrowsException() {
+         assertThrows( IllegalArgumentException.class,
+                () -> target.setAge(101) );
+    }
+
+    @Test
+    @DisplayName("Set hunger is successful")
+    void setHunger_ValidInput_Success() {
+        assertEquals( STANDARD_HUNGER, target.getHunger() );
+        target.setHunger((short) 44);
+        assertEquals( 44, target.getHunger() );
+    }
+
+    @Test
+    @DisplayName("Set hunger to invalid range")
+    void setHunger_InalidInput_ThrowsException() {
+        assertThrows( IllegalArgumentException.class,
+                () -> target.setHunger((short) -1) );
+        assertThrows( IllegalArgumentException.class,
+                () -> target.setHunger((short) 101) );
+    }
+
+    @Test
     @DisplayName("Tiger is hungry")
     void isHungry_Hunger50_ReturnsTrue() {
         target.setHunger((short) 50);
@@ -77,6 +138,7 @@ class AnimalTest {
     }
 
     @Test
+    @DisplayName("toString() produces expected output")
     void testToString() {
         assertEquals("[id=1, name='George', age=7]", target.toString());
     }
