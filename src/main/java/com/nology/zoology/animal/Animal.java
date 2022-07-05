@@ -7,8 +7,6 @@ public class Animal {
     protected int id;
     protected String name;
     protected int age;
-    protected boolean pettable;
-    protected int popularity;
     protected short hunger = 50;
 
     public Animal(int id, String name, int age) {
@@ -39,18 +37,6 @@ public class Animal {
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public boolean isPettable() {
-        return pettable;
-    }
-
-    public void setPettable(boolean pettable) {
-        this.pettable = pettable;
-    }
-
-    public int getPopularity() {
-        return popularity;
     }
 
     public short getHunger() {
