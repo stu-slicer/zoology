@@ -55,6 +55,9 @@ public abstract class Animal implements Comparable<Animal>, Starrable {
     }
 
     public void setAge(int age) {
+        if( age < 1 || age > 99 ) {
+            throw new IllegalArgumentException("Age must be betweem 1 and 99 years");
+        }
         this.age = age;
     }
 
