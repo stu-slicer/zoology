@@ -83,6 +83,11 @@ public abstract class Animal {
 
     public abstract void makeSound();
 
+    public String getInformation() {
+        return String.format("%s, a %s, is %d years old, popularity %d%%, hunger %d%%",
+                this.name, getType(), this.age, this.popularity, this.hunger);
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("");
