@@ -85,6 +85,11 @@ public abstract class Animal implements Comparable<Animal> {
 
     public abstract void makeSound();
 
+    public String getInformation() {
+        return String.format("%s, a %s, is %d years old, popularity %d%%, hunger %d%%",
+                this.name, getType(), this.age, this.popularity, this.hunger);
+    }
+
     @Override
     public int compareTo(Animal other) {
         // order by id
