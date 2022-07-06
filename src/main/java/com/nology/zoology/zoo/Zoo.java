@@ -18,7 +18,7 @@ public class Zoo {
 
     private AnimalLoader animalLoader;
 
-    public Zoo(AnimalLoader animalLoader) {
+    Zoo(AnimalLoader animalLoader) {
         this.animalLoader = animalLoader;
         List<Animal> toLoad = animalLoader.loadAnimals();
         for (Animal animalToLoad : toLoad) {
