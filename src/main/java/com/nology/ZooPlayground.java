@@ -2,6 +2,7 @@ package com.nology;
 
 import com.nology.zoology.animal.*;
 import com.nology.zoology.zoo.Zoo;
+import com.nology.zoology.zoo.ZooFactory;
 
 import java.util.List;
 import java.util.Random;
@@ -16,7 +17,7 @@ public class ZooPlayground {
         System.out.println("Tiger " + tiger.getName() + " is " + tiger.getAge() + " years old");
         System.out.println(tiger);
 
-        Zoo zoo = new Zoo();
+        Zoo zoo = ZooFactory.getOrCreateZoo();
 
         AnimalFactory animalFactory = new AnimalFactory();
 //        // three tigers

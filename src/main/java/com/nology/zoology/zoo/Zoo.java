@@ -15,6 +15,10 @@ public class Zoo {
 
     private Map<String, List<Animal>> nameMap = new HashMap<>();
 
+    Zoo() {
+        // only construct with this package.
+    }
+
     public void addAnimal(Tiger tiger) {
         this.animals.add(tiger);
         this.idMap.put( tiger.getId(), tiger);
