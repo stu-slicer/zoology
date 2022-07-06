@@ -11,6 +11,10 @@ public class Zoo {
 
     private ArrayList<Animal> animals = new ArrayList<>();
 
+    Zoo() {
+
+    }
+
     public void addAnimal(Tiger tiger) {
         this.animals.add(tiger);
     }
