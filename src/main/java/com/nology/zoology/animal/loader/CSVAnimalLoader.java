@@ -29,28 +29,32 @@ public class CSVAnimalLoader implements AnimalLoader {
 
             String[] split = line.split(",");
 
-            int id = Integer.valueOf( split[0] );
-            AnimalType type = AnimalType.valueOf( split[1] );
-            String name = split[2];
-            int age = Integer.valueOf( split[3] );
+            try {
+                int id = Integer.valueOf( split[0] );
+                AnimalType type = AnimalType.valueOf( split[1] );
+                String name = split[2];
+                int age = Integer.valueOf( split[3] );
 
-            Animal toLoad = null;
-            switch (type) {
-                case tiger:
-                    toLoad = new Tiger( id, name, age);
-                    break;
-                case llama:
-                    toLoad = new Llama( id, name, age);
-                    break;
-                case lion:
-                    toLoad = new Lion( id, name, age);
-                    break;
-                case crocodile:
-                    toLoad = new Crocodile( id, name, age);
-                    break;
+                Animal toLoad = null;
+                switch (type) {
+                    case tiger:
+                        toLoad = new Tiger( id, name, age);
+                        break;
+                    case llama:
+                        toLoad = new Llama( id, name, age);
+                        break;
+                    case lion:
+                        toLoad = new Lion( id, name, age);
+                        break;
+                    case crocodile:
+                        toLoad = new Crocodile( id, name, age);
+                        break;
+                }
+
+                animals.add( toLoad );
+            } catch (IllegalArgumentException e) {
+                System.err.println("Exception attempting to load line: " + line);
             }
-
-            animals.add( toLoad );
         }
 
         return animals;
