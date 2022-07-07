@@ -69,25 +69,31 @@ public class CSVZooDataLoader implements ZooDataLoader {
 
             String[] split = line.split(",");
 
-            int id = Integer.valueOf( split[ANIMAL_ID] );
-            AnimalType type = AnimalType.valueOf( split[ANIMAL_TYPE] );
-            String name = split[ANIMAL_NAME];
-            int age = Integer.valueOf( split[ANIMAL_AGE] );
-            int popularity = Integer.valueOf( split[ANIMAL_POPULARITY] );
-            int stars = Integer.valueOf( split[ANIMAL_STARS] );
-            short hunger = Short.valueOf( split[ANIMAL_HUNGER] );
-            boolean pettable = Boolean.valueOf( split[ANIMAL_PETTABLE] );
 
-            Animal toLoad = AnimalBuilder.animal(name)
-                    .withId(id)
-                    .withType(type)
-                    .withAge(age)
-                    .withPettable(pettable)
-                    .withPopularity(popularity)
-                    .withStars(stars)
-                    .withHunger(hunger)
-                    .build();
-            animals.add( toLoad );
+            try {
+                int id = Integer.valueOf( split[ANIMAL_ID] );
+                AnimalType type = AnimalType.valueOf( split[ANIMAL_TYPE] );
+                String name = split[ANIMAL_NAME];
+                int age = Integer.valueOf( split[ANIMAL_AGE] );
+                int popularity = Integer.valueOf( split[ANIMAL_POPULARITY] );
+                int stars = Integer.valueOf( split[ANIMAL_STARS] );
+                short hunger = Short.valueOf( split[ANIMAL_HUNGER] );
+                boolean pettable = Boolean.valueOf( split[ANIMAL_PETTABLE] );
+
+                Animal toLoad = AnimalBuilder.animal(name)
+                        .withId(id)
+                        .withType(type)
+                        .withAge(age)
+                        .withPettable(pettable)
+                        .withPopularity(popularity)
+                        .withStars(stars)
+                        .withHunger(hunger)
+                        .build();
+                animals.add( toLoad );
+
+            } catch (IllegalArgumentException e) {
+                System.err.println("Exception attempting to load from line: " + line);
+            }
         }
 
         return animals;
