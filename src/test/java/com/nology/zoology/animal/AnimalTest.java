@@ -40,6 +40,28 @@ class AnimalTest {
 
 
     @Test
+    @DisplayName("Missing name throws exception on construction")
+    void constructor_InvalidName_ThrowsException() {
+        assertThrows( IllegalArgumentException.class,
+                () -> {
+                    Lion animal = new Lion(1, "", 12);
+                });
+    }
+
+    @Test
+    @DisplayName("Invalid age throws exception on construction")
+    void constructor_InvalidAge_ThrowsException() {
+        assertThrows( IllegalArgumentException.class,
+                () -> {
+                    Lion animal = new Lion(ANIMAL_ID, ANIMAL_NAME, -1);
+                });
+        assertThrows( IllegalArgumentException.class,
+                () -> {
+                    Lion animal = new Lion(ANIMAL_ID, ANIMAL_NAME, 100);
+                });
+    }
+
+    @Test
     @DisplayName("Get id is successful")
     void getId_ValidData_ReturnsId() {
         assertEquals( ANIMAL_ID, target.getId() );
