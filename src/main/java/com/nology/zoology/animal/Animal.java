@@ -15,6 +15,8 @@ public abstract class Animal implements Comparable<Animal>, Starrable {
     protected short hunger = 50; // start 50% hungry
 
     public Animal(int id, String name, int age) {
+        validateAnimalName(name);
+        validateAnimalAge(age);
         this.id = id;
         this.name = name;
         this.age = age;
@@ -40,6 +42,18 @@ public abstract class Animal implements Comparable<Animal>, Starrable {
     }
 
     public void setName(String name) {
+        validateAnimalName(name);
+        this.name = name;
+    }
+
+    /**
+     * Validate the name for the animal, must be a valid String, not empty.
+     * @param name
+     */
+    private void validateAnimalName(String name) {
+        if( name == null || "".equals(name.trim()) ) {
+            throw new IllegalArgumentException("Name must be a valid name");
+        }
         this.name = name;
     }
 
@@ -48,6 +62,18 @@ public abstract class Animal implements Comparable<Animal>, Starrable {
     }
 
     public void setAge(int age) {
+        validateAnimalAge(age);
+        this.age = age;
+    }
+
+    /**
+     * Validate the animal's age, must be between 1 and 99.
+     * @param age
+     */
+    private void validateAnimalAge(int age) {
+        if (age < 1 || age > 99) {
+            throw new IllegalArgumentException("Age must be betweem 1 and 99 years");
+        }
         this.age = age;
     }
 
