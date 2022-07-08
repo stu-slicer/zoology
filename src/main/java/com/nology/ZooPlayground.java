@@ -5,6 +5,7 @@ import com.nology.zoology.animal.loader.RandomAnimalLoader;
 import com.nology.zoology.command.*;
 import com.nology.zoology.user.UserType;
 import com.nology.zoology.zoo.Zoo;
+import com.nology.zoology.zoo.ZooBuilder;
 
 import java.util.Random;
 
@@ -18,6 +19,11 @@ public class ZooPlayground {
         CSVAnimalLoader csvAnimalLoader = new CSVAnimalLoader("src/main/resources/animals-to-load.csv");
 
         Zoo zoo = new Zoo( randomAnimalLoader );
+
+//        // alternative
+//        Zoo zoo = ZooBuilder.create()
+//                .withAnimalLoader(randomAnimalLoader)
+//                .build();
 
         System.out.println( zoo.getAnimalCount() );
 
