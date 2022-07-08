@@ -19,6 +19,11 @@ public class ZooPlayground {
 
         Zoo zoo = new Zoo( randomAnimalLoader );
 
+//        // alternative
+//        Zoo zoo = ZooBuilder.create()
+//                .withAnimalLoader(randomAnimalLoader)
+//                .build();
+
         System.out.println( zoo.getAnimalCount() );
 
         UserCommandRunner userCommandRunner = new UserCommandRunner(zoo);
