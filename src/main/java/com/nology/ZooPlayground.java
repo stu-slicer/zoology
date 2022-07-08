@@ -2,6 +2,7 @@ package com.nology;
 
 import com.nology.zoology.animal.loader.CSVAnimalLoader;
 import com.nology.zoology.animal.loader.RandomAnimalLoader;
+import com.nology.zoology.animal.loader.StreamRandomAnimalLoader;
 import com.nology.zoology.command.*;
 import com.nology.zoology.user.UserType;
 import com.nology.zoology.zoo.Zoo;
@@ -15,9 +16,10 @@ public class ZooPlayground {
     public static void main(String[] args) {
 
         RandomAnimalLoader randomAnimalLoader = new RandomAnimalLoader();
+        StreamRandomAnimalLoader streamRandomAnimalLoader = new StreamRandomAnimalLoader();
         CSVAnimalLoader csvAnimalLoader = new CSVAnimalLoader("src/main/resources/animals-to-load.csv");
 
-        Zoo zoo = new Zoo( randomAnimalLoader );
+        Zoo zoo = new Zoo( streamRandomAnimalLoader );
 
 //        // alternative
 //        Zoo zoo = ZooBuilder.create()
