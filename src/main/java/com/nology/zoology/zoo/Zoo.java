@@ -130,33 +130,37 @@ public class Zoo {
     }
 
     public void listAnimals(AnimalSorting animalSorting) {
+        // copy to prevent concurrency issues
+        List<Animal> forSorting = new ArrayList<>(this.animals);
         switch (animalSorting) {
             case byName:
-                Collections.sort(animals, new SortByAnimalName());
+                Collections.sort(forSorting, new SortByAnimalName());
                 break;
             case byType:
-                Collections.sort(animals, new SortByAnimalTypeThenName());
+                Collections.sort(forSorting, new SortByAnimalTypeThenName());
                 break;
             default:
-                Collections.sort(animals);
+                Collections.sort(forSorting);
         }
-        for (Animal animal : animals) {
+        for (Animal animal : forSorting) {
             System.out.println("Animal: " + animal);
         }
     }
 
     public List<Animal> getAnimals(AnimalSorting animalSorting) {
+        // copy to prevent concurrency issues
+        List<Animal> forSorting = new ArrayList<>(this.animals);
         switch (animalSorting) {
             case byName:
-                Collections.sort(animals, new SortByAnimalName());
+                Collections.sort(forSorting, new SortByAnimalName());
                 break;
             case byType:
-                Collections.sort(animals, new SortByAnimalTypeThenName());
+                Collections.sort(forSorting, new SortByAnimalTypeThenName());
                 break;
             default:
-                Collections.sort(animals);
+                Collections.sort(forSorting);
         }
-        return List.copyOf( animals );
+        return forSorting;
     }
 
     public List<Animal> getMostPopularAnimals(int top) {

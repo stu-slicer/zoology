@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.swing.event.AncestorEvent;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/zoology")
+@CrossOrigin("http://localhost:3000")
 public class ZooRestController {
 
     @Autowired
@@ -22,9 +24,21 @@ public class ZooRestController {
     // GET animals
     // GET /zoology/v1/animals
     @GetMapping("/animals")
-    public ResponseEntity<List<Animal>> getAllAnimals() {
+    public ResponseEntity<List<Animal>> getAllAnimals(@RequestParam(value = "filterBy", defaultValue = "") String filterBy) {
         List<Animal> animals = zoo.getAnimals(AnimalSorting.byId);
+        if (filterBy != null && !"".equals(filterBy)) {
+            List<Animal> filtered = animals.stream()
+                    .filter(animal -> animal.getType().toString().equalsIgnoreCase(filterBy.trim()))
+                    .collect(Collectors.toList());
+            return ResponseEntity.status(HttpStatus.OK).body( filtered );
+        }
         return ResponseEntity.status(HttpStatus.OK).body( animals );
+    }
+
+    @GetMapping("/animal/{id}")
+    public ResponseEntity<Animal> getAnimalById(@PathVariable int id) {
+        Optional<Animal> animalById = this.zoo.findAnimalById(id);
+        return ResponseEntity.status(HttpStatus.OK).body( animalById.orElse(null) );
     }
 
     // GET animals
