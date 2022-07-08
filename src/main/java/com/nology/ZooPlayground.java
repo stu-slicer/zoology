@@ -7,6 +7,7 @@ import com.nology.zoology.data.CSVZooDataLoader;
 import com.nology.zoology.data.ZooDataLoader;
 import com.nology.zoology.user.UserType;
 import com.nology.zoology.zoo.Zoo;
+import com.nology.zoology.zoo.ZooBuilder;
 
 import java.util.Random;
 
@@ -21,8 +22,10 @@ public class ZooPlayground {
 
         ZooDataLoader zooDataLoader = new CSVZooDataLoader( CSVZooDataLoader.DEFAULT_DATA_FILE );
 
-        Zoo zoo = new Zoo( randomAnimalLoader, zooDataLoader );
-
+        Zoo zoo = ZooBuilder.create()
+                .withAnimalLoader( randomAnimalLoader )
+                .withZooDataLoader( zooDataLoader )
+                .build();
 
         System.out.println( zoo.getAnimalCount() );
 

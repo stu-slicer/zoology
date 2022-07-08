@@ -40,11 +40,11 @@ public class Zoo {
         final List<Animal> toLoad = loadAnimals();
 
         for (Animal animalToLoad : toLoad) {
-            this.animals.add( animalToLoad );
-            addAnimalToMaps( animalToLoad );
+            this.animals.add(animalToLoad);
+            addAnimalToMaps(animalToLoad);
         }
 
-        if( zooDataLoader != null ) {
+        if (zooDataLoader != null) {
             this.zooDataLoader.saveAnimalData(animals);
         }
 
@@ -58,18 +58,18 @@ public class Zoo {
         System.out.println("shuttimg down threads, saving data and all that jazz");
         stopThreads();
         if (this.zooDataLoader != null) {
-            this.zooDataLoader.saveAnimalData( this.animals );
+            this.zooDataLoader.saveAnimalData(this.animals);
         }
     }
 
-        private List<Animal> loadAnimals() {
-            List<Animal> toLoad = null;
+    private List<Animal> loadAnimals() {
+        List<Animal> toLoad = null;
 
-        if( animalGeneration == AnimalGeneration.fromPreviousGame && this.zooDataLoader != null ) {
+        if (animalGeneration == AnimalGeneration.fromPreviousGame && this.zooDataLoader != null) {
             toLoad = zooDataLoader.loadAnimalData();
             System.out.println("Animals loaded from previous game");
 
-            if( ! toLoad.isEmpty() ) {
+            if (!toLoad.isEmpty()) {
                 return toLoad;
             }
             // if nothing loaded (no file) then get animals using AnimalLoader.
@@ -78,8 +78,8 @@ public class Zoo {
         toLoad = animalLoader.loadAnimals();
         System.out.println("Animals loaded from loader");
 
-            return toLoad;
-        }
+        return toLoad;
+    }
 
     public void stopThreads() {
         System.out.println("Closing down!");
@@ -102,10 +102,10 @@ public class Zoo {
     }
 
     private void addAnimalToMaps(Animal animal) {
-        this.idMap.put( animal.getId(), animal);
-        List<Animal> animalList = this.nameMap.getOrDefault( animal.getName().toLowerCase(), new ArrayList<>() );
+        this.idMap.put(animal.getId(), animal);
+        List<Animal> animalList = this.nameMap.getOrDefault(animal.getName().toLowerCase(), new ArrayList<>());
         animalList.add(animal);
-        this.nameMap.put( animal.getName().toLowerCase(), animalList);
+        this.nameMap.put(animal.getName().toLowerCase(), animalList);
     }
 
     public void listAnimals(AnimalSorting animalSorting) {
@@ -135,21 +135,21 @@ public class Zoo {
             default:
                 Collections.sort(animals);
         }
-        return List.copyOf( animals );
+        return List.copyOf(animals);
     }
 
     public List<Animal> getMostPopularAnimals(int top) {
         return this.animals.stream()
-                .filter( a -> a.getStars() > 0 )
-                .sorted( (a,b) -> b.getStars() - a.getStars() ) // reversed!
+                .filter(a -> a.getStars() > 0)
+                .sorted((a, b) -> b.getStars() - a.getStars()) // reversed!
                 .limit(top)
                 .collect(Collectors.toList());
     }
 
     public List<Animal> getHungeriestAniamls(int threshold) {
         return this.animals.stream()
-                .filter( a -> a.getHunger() > threshold )
-                .sorted( (a,b) -> b.getHunger() - a.getHunger()  )
+                .filter(a -> a.getHunger() > threshold)
+                .sorted((a, b) -> b.getHunger() - a.getHunger())
                 .collect(Collectors.toList());
     }
 
@@ -158,7 +158,7 @@ public class Zoo {
     }
 
     public List<Animal> findAnimalsByName(String name) {
-        return this.nameMap.getOrDefault( name.toLowerCase(), new ArrayList<>() );
+        return this.nameMap.getOrDefault(name.toLowerCase(), new ArrayList<>());
     }
 
 }
