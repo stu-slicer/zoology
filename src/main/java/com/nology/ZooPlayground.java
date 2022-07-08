@@ -2,6 +2,7 @@ package com.nology;
 
 import com.nology.zoology.animal.loader.CSVAnimalLoader;
 import com.nology.zoology.animal.loader.RandomAnimalLoader;
+import com.nology.zoology.animal.loader.StreamRandomAnimalLoader;
 import com.nology.zoology.command.*;
 import com.nology.zoology.data.CSVZooDataLoader;
 import com.nology.zoology.data.ZooDataLoader;
@@ -18,12 +19,13 @@ public class ZooPlayground {
     public static void main(String[] args) {
 
         RandomAnimalLoader randomAnimalLoader = new RandomAnimalLoader();
+        StreamRandomAnimalLoader streamRandomAnimalLoader = new StreamRandomAnimalLoader(12);
         CSVAnimalLoader csvAnimalLoader = new CSVAnimalLoader("src/main/resources/animals-to-load.csv");
 
         ZooDataLoader zooDataLoader = new CSVZooDataLoader( CSVZooDataLoader.DEFAULT_DATA_FILE );
 
         Zoo zoo = ZooBuilder.create()
-                .withAnimalLoader( randomAnimalLoader )
+                .withAnimalLoader( streamRandomAnimalLoader )
                 .withZooDataLoader( zooDataLoader )
                 .build();
 
