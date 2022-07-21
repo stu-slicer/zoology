@@ -37,7 +37,11 @@ public class Animal {
     }
 
     public void makeSound() {
-        System.out.println("They same nothing..."); // silence
+        System.out.println("They say nothing..."); // silence
+    }
+
+    public String getInformation() {
+        return this.name + " (" + this.id + "), an animal, is " + this.age + " years old";
     }
 
     @Override
