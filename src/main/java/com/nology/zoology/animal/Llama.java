@@ -11,4 +11,9 @@ public class Llama extends Animal {
         System.out.println("Spit!");
     }
 
+    @Override
+    public String getInformation() {
+        return this.name + " (" + this.id + "), a llama, is " + this.age + " years old";
+    }
+
 }
