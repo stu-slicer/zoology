@@ -34,4 +34,8 @@ public class Llama {
         System.out.println("Spit!");
     }
 
+    public String getInformation() {
+        return this.name + " (" + this.id + "), a llama, is " + this.age + " years old";
+    }
+
 }

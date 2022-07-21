@@ -24,6 +24,8 @@ public class ZooPlayground {
         ZooPlayground playground = new ZooPlayground();
         Tiger tiddles = playground.buildTiger(4, "Tiddles", 12);
 
+        System.out.println(tiddles.getInformation());
+
     }
 
     // Extension

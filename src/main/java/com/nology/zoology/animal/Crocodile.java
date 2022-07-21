@@ -33,4 +33,9 @@ public class Crocodile {
     public void makeSound() {
         System.out.println("Snap!");
     }
+
+    public String getInformation() {
+        return this.name + " (" + this.id + "), a crocodile, is " + this.age + " years old";
+    }
+
 }

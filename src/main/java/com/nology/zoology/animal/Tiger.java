@@ -33,4 +33,8 @@ public class Tiger {
     public void makeSound() {
         System.out.println("Grrrrrr!");
     }
+
+    public String getInformation() {
+        return this.name + " (" + this.id + "), a tiger, is " + this.age + " years old";
+    }
 }
