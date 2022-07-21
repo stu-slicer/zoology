@@ -10,4 +10,10 @@ public class Lion extends Animal {
     public void makeSound() {
         System.out.println("Roooaaaarrrrr!");
     }
+
+
+    @Override
+    public String getInformation() {
+        return this.name + " (" + this.id + "), a lion, is " + this.age + " years old";
+    }
 }

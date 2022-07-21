@@ -10,4 +10,10 @@ public class Crocodile extends Animal {
     public void makeSound() {
         System.out.println("Snap, snap!");
     }
+
+    @Override
+    public String getInformation() {
+        return this.name + " (" + this.id + "), a crocodile, is " + this.age + " years old";
+    }
+
 }
