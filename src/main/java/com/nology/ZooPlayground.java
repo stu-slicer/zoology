@@ -4,6 +4,7 @@ import com.nology.zoology.animal.*;
 import com.nology.zoology.zoo.Zoo;
 
 import java.util.Random;
+import java.util.Scanner;
 
 import static com.nology.zoology.animal.AnimalUtils.*;
 
@@ -47,8 +48,39 @@ public class ZooPlayground {
             }
         }
 
+        // or user defined!
+        Scanner scanner = new Scanner(System.in);
+
+        int numTigers = readInteger(scanner, "How many tigers do you want to create? ", 1, 5);
+        int numLLamas = readInteger(scanner, "How many llamas do you want to create? ", 1, 5);
+        int numLCrocs = readInteger(scanner, "How many crocodiles do you want to create? ", 1, 5);
+
+        for (int i = 0; i < numTigers; i++) {
+            zoo.addAnimal(new Tiger( nextUniqueId(), generateName(), generateAge() ));
+        }
+        for (int i = 0; i < numLLamas; i++) {
+            zoo.addAnimal(new Llama( nextUniqueId(), generateName(), generateAge() ));
+        }
+        for (int i = 0; i < numLCrocs; i++) {
+            zoo.addAnimal(new Crocodile( nextUniqueId(), generateName(), generateAge() ));
+        }
+
         System.out.println( zoo.getAnimalCount() );
 
+
+    }
+
+    private static int readInteger(Scanner scanner, String prompt, int min, int max) {
+        int num = -1;
+        while ( num < min || num > max ) {
+            System.out.println(prompt);
+            num = scanner.nextInt();
+            if( num < min || num > max ) {
+                System.out.println("Please enter in range of " + min + " and " + max);
+            }
+
+        }
+        return num;
     }
 
 
