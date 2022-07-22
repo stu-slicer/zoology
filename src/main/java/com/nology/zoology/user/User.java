@@ -1,2 +1,4 @@
-package com.nology.zoology.user;public class User {
+package com.nology.zoology.user;
+
+public class User {
 }
